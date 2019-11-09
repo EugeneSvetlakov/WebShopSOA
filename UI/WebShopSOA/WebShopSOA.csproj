@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk.Web">
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
 
   <PropertyGroup>
     <TargetFramework>netcoreapp2.2</TargetFramework>
@@ -47,8 +47,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\WebShopSOA.DAL\WebShopSOA.DAL.csproj" />
-    <ProjectReference Include="..\WebShopSOA.Domain\WebShopSOA.Domain.csproj" />
+    <ProjectReference Include="..\..\Common\WebShopSOA.Domain\WebShopSOA.Domain.csproj" />
+    <ProjectReference Include="..\..\Services\WebShopSOA.DAL\WebShopSOA.DAL.csproj" />
   </ItemGroup>
 
 </Project>
