@@ -1,0 +1,29 @@
+// Configure bundling and minification for the project.
+[
+  {
+    "outputFileName": "wwwroot/css/site.min.css",
+    // An array of relative input file path. Globbing patterns supported
+    "inputFiles": [
+      "wwwroot/css/animate.css",
+      "wwwroot/css/prettyPhoto.css",
+      "wwwroot/css/price-range.css",
+      //"wwwroot/css/price-range.css", // нужна правка ошибок в стилях
+      "wwwroot/css/responsive.css"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/js/site.min.js",
+    "inputFiles": [
+      "wwwroot/js/main.js",
+      "wwwroot/js/jquery.prettyPhoto.js",
+      "wwwroot/js/price-range.js"
+    ],
+    // Optionally specify minification options
+    "minify": {
+      "enabled": true,
+      "renameLocals": true
+    },
+    // Optionally generate .map file
+    "sourceMap": true
+  }
+]

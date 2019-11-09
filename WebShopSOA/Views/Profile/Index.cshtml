@@ -1,0 +1,12 @@
+﻿
+@{
+    ViewData["Title"] = "Данные профиля";
+    Layout = "_ProfileLayout"; // ПодШаюлон
+}
+
+
+<h3>@ViewData["Title"]</h3>
+<div class="row">
+    <div class="col-md-2">Пользователь:</div>
+    <div class="col-md-3">@User.Identity.Name</div>
+</div>

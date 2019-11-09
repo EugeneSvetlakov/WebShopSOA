@@ -1,0 +1,10 @@
+﻿@{
+    Layout = "_Layout"; // Головной шаблон
+}
+<div class="row">
+    <div class="col-md-3">@await Html.PartialAsync("Partial/_ProfileMenu")</div>
+    <div class="col-md-9">
+    <!-- Формируется содержимое для Action методов контроллера ProfileController -->
+        @RenderBody()
+    </div>
+</div>
