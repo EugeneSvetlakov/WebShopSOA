@@ -1,4 +1,4 @@
-﻿namespace WebShopSOA.ViewModels
+﻿namespace WebShopSOA.Domain.ViewModels
 {
     public class CartItem
     {

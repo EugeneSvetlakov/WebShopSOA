@@ -6,10 +6,10 @@ using System.Linq;
 using System.Threading.Tasks;
 using WebShopSOA.DAL;
 using WebShopSOA.Domain.Entities;
-using WebShopSOA.Infrastructure.Interfaces;
-using WebShopSOA.ViewModels;
+using WebShopSOA.Interfaces.Services;
+using WebShopSOA.Domain.ViewModels;
 
-namespace WebShopSOA.Infrastructure.Services
+namespace WebShopSOA.Services.ShopProduct
 {
     public class SqlOrderService : IOrderService
     {

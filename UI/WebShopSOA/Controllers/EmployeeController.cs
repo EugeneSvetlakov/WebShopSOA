@@ -5,8 +5,8 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using WebShopSOA.Infrastructure.Interfaces;
-using WebShopSOA.ViewModels;
+using WebShopSOA.Interfaces.Services;
+using WebShopSOA.Domain.ViewModels;
 
 namespace WebShopSOA.Controllers
 {

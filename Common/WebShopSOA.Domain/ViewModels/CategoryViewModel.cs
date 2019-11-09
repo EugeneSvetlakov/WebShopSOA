@@ -4,7 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using WebShopSOA.Domain.Entities.Base.Interfaces;
 
-namespace WebShopSOA.ViewModels
+namespace WebShopSOA.Domain.ViewModels
 {
     public class CategoryViewModel : INamedEntity, IOrderedEntity
     {

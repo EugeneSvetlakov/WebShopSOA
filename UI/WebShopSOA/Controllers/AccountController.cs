@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Http.Extensions;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using WebShopSOA.Domain.Entities;
-using WebShopSOA.ViewModels;
+using WebShopSOA.Domain.ViewModels;
 
 namespace WebShopSOA.Controllers
 {

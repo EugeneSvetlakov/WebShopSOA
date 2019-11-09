@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using WebShopSOA.Domain.Filters;
-using WebShopSOA.Infrastructure.Interfaces;
+using WebShopSOA.Interfaces.Services;
 
 namespace WebShopSOA.Areas.Admin.Controllers
 {

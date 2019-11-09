@@ -1,13 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using Microsoft.AspNetCore.Mvc.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Mvc;
 
-namespace WebShopSOA.ViewModels
+namespace WebShopSOA.Domain.ViewModels
 {
     public class EmployeeView
     {
+        [HiddenInput(DisplayValue = false)] // Признак того, что в представлении отображать это поле не стоит
         public int Id { get; set; }
 
         [Required(AllowEmptyStrings = false, ErrorMessage = "Имя является обязательным.")]

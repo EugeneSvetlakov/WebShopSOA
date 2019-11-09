@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 
-namespace WebShopSOA.ViewModels
+namespace WebShopSOA.Domain.ViewModels
 {
     public class Cart
     {

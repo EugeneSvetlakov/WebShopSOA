@@ -4,9 +4,9 @@ using System.Linq;
 using System.Threading.Tasks;
 using WebShopSOA.Domain.Entities;
 using WebShopSOA.Domain.Filters;
-using WebShopSOA.ViewModels;
+using WebShopSOA.Domain.ViewModels;
 
-namespace WebShopSOA.Infrastructure.Interfaces
+namespace WebShopSOA.Interfaces.Services
 {
     public interface IProductService
     {

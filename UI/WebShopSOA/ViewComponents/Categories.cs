@@ -3,8 +3,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using WebShopSOA.Infrastructure.Interfaces;
-using WebShopSOA.ViewModels;
+using WebShopSOA.Interfaces.Services;
+using WebShopSOA.Domain.ViewModels;
 
 namespace WebShopSOA.ViewComponents
 {

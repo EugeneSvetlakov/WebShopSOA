@@ -3,8 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using WebShopSOA.Infrastructure.Interfaces;
-using WebShopSOA.ViewModels;
+using WebShopSOA.Interfaces.Services;
+using WebShopSOA.Domain.ViewModels;
 
 namespace WebShopSOA.Controllers
 {

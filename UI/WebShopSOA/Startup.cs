@@ -12,8 +12,8 @@ using Microsoft.Extensions.DependencyInjection;
 using WebShopSOA.DAL;
 using WebShopSOA.Domain.Entities;
 using WebShopSOA.Infrastructure;
-using WebShopSOA.Infrastructure.Interfaces;
-using WebShopSOA.Infrastructure.Services;
+using WebShopSOA.Interfaces.Services;
+using WebShopSOA.Services.ShopProduct;
 
 namespace WebShopSOA
 {

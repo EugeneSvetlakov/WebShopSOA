@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using WebShopSOA.ViewModels;
+using WebShopSOA.Domain.ViewModels;
 
-namespace WebShopSOA.Infrastructure.Services
+namespace WebShopSOA.Interfaces.Services
 {
     public interface ICartService
     {

@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using WebShopSOA.ViewModels;
+using WebShopSOA.Domain.ViewModels;
 
-namespace WebShopSOA.Infrastructure.Interfaces
+namespace WebShopSOA.Interfaces.Services
 {
     /// <summary>
     /// Интерфейс для работы с сотрудниками

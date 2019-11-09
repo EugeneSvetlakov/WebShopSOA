@@ -4,9 +4,9 @@ using System.Linq;
 using System.Threading.Tasks;
 using WebShopSOA.Domain.Entities;
 using WebShopSOA.Domain.Filters;
-using WebShopSOA.Infrastructure.Interfaces;
+using WebShopSOA.Interfaces.Services;
 
-namespace WebShopSOA.Infrastructure.Services
+namespace WebShopSOA.Services.ShopProduct
 {
     public class InMemoryProductService : IProductService
     {
