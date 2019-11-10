@@ -48,6 +48,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\Common\WebShopSOA.Domain\WebShopSOA.Domain.csproj" />
+    <ProjectReference Include="..\..\Services\WebShopSOA.Clients\WebShopSOA.Clients.csproj" />
     <ProjectReference Include="..\..\Services\WebShopSOA.DAL\WebShopSOA.DAL.csproj" />
     <ProjectReference Include="..\..\Services\WebShopSOA.Interfaces\WebShopSOA.Interfaces.csproj" />
     <ProjectReference Include="..\..\Services\WebShopSOA.Services\WebShopSOA.Services.csproj" />
