@@ -9,9 +9,11 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using WebShopSOA.Clients.Values;
 using WebShopSOA.DAL;
 using WebShopSOA.Domain.Entities;
 using WebShopSOA.Infrastructure;
+using WebShopSOA.Interfaces.Api;
 using WebShopSOA.Interfaces.Services;
 using WebShopSOA.Services.ShopProduct;
 
@@ -40,6 +42,9 @@ namespace WebShopSOA
             services.AddSingleton<IEmployeeService, EmployeeService>();
             services.AddDbContext<WebShopSOADbContext>(options => options.UseSqlServer(
                 Configuration.GetConnectionString("DefaultConnection")));
+
+            services.AddScoped<IValuesService, ValuesClient>(); // Get Data throught Api Testing release
+            
             // подключенеи аутентификации
             services.AddIdentity<User, IdentityRole>()
                 .AddEntityFrameworkStores<WebShopSOADbContext>()
