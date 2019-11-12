@@ -25,20 +25,22 @@ namespace WebShopSOA.Interfaces.Services
         EmployeeView GetById(int id);
 
         /// <summary>
-        /// Сохранение изменений
-        /// </summary>
-        void Commit();
-
-        /// <summary>
         /// Добавление нового сотрудника
         /// </summary>
         /// <param name="model"></param>
         void AddNew(EmployeeView model);
+
+        EmployeeView Update(int id, EmployeeView employee);
 
         /// <summary>
         /// Удалить сотрудника
         /// </summary>
         /// <param name="id"></param>
         void Delete(int id);
+        
+        /// <summary>
+        /// Сохранение изменений
+        /// </summary>
+        void Commit();
     }
 }
