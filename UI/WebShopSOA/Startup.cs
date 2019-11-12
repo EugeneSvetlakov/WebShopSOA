@@ -36,12 +36,9 @@ namespace WebShopSOA
                 options.Filters.Add(new SimpleActionFilterAttribute());
             });
 
-            //services.AddSingleton<IProductService, InMemoryProductService>(); // Данные из памяти
+            services.AddSingleton<IEmployeeService, EmployeeService>();
             services.AddScoped<IProductService, SqlProductService>(); // Данные из БД
             services.AddScoped<IOrderService, SqlOrderService>(); // Данные из БД
-            services.AddSingleton<IEmployeeService, EmployeeService>();
-            services.AddDbContext<WebShopSOADbContext>(options => options.UseSqlServer(
-                Configuration.GetConnectionString("DefaultConnection")));
 
             services.AddScoped<IValuesService, ValuesClient>(); // Get Data throught Api Testing release
             

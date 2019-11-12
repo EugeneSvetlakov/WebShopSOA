@@ -5,10 +5,14 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
+using WebShopSOA.DAL;
+using WebShopSOA.Interfaces.Services;
+using WebShopSOA.Services.ShopProduct;
 
 namespace WebShopSOA.ServiceHosting
 {
@@ -25,6 +29,14 @@ namespace WebShopSOA.ServiceHosting
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
+
+            services.AddDbContext<WebShopSOADbContext>(options => options.UseSqlServer(
+                Configuration.GetConnectionString("DefaultConnection")));
+
+            services.AddSingleton<IEmployeeService, EmployeeService>();
+            services.AddScoped<IProductService, SqlProductService>(); // Данные из БД
+            services.AddScoped<IOrderService, SqlOrderService>(); // Данные из БД
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
