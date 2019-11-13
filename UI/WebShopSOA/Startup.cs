@@ -10,6 +10,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using WebShopSOA.Clients.Employees;
+using WebShopSOA.Clients.Products;
 using WebShopSOA.Clients.Values;
 using WebShopSOA.DAL;
 using WebShopSOA.Domain.Entities;
@@ -41,7 +42,7 @@ namespace WebShopSOA
                 Configuration.GetConnectionString("DefaultConnection")));
 
             services.AddSingleton<IEmployeeService, EmployeesClient>();
-            services.AddScoped<IProductService, SqlProductService>(); // Данные из БД
+            services.AddScoped<IProductService, ProductsClient>(); // Данные из БД
             services.AddScoped<IOrderService, SqlOrderService>(); // Данные из БД
 
             services.AddScoped<IValuesService, ValuesClient>(); // Get Data throught Api Testing release
