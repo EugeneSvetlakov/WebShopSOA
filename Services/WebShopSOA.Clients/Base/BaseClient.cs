@@ -57,9 +57,9 @@ namespace WebShopSOA.Clients.Base
             return response.EnsureSuccessStatusCode();
         }
 
-        protected HttpResponseMessage Delete<T>(string url) => DeleteAsync<T>(url).Result;
+        protected HttpResponseMessage Delete(string url) => DeleteAsync(url).Result;
 
-        protected async Task<HttpResponseMessage> DeleteAsync<T>(string url, CancellationToken Cancell = default) => 
+        protected async Task<HttpResponseMessage> DeleteAsync(string url, CancellationToken Cancell = default) => 
             await _Client.DeleteAsync(url, Cancell);
     }
 }

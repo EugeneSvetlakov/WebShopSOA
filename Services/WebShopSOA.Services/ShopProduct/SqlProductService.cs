@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using WebShopSOA.DAL;
+using WebShopSOA.Domain.DTO.Products;
 using WebShopSOA.Domain.Entities;
 using WebShopSOA.Domain.Filters;
 using WebShopSOA.Interfaces.Services;
@@ -30,15 +31,28 @@ namespace WebShopSOA.Services.ShopProduct
             return _context.Categories.ToList();
         }
 
-        public Product GetProductById(int id)
+        public ProductDTO GetProductById(int id)
         {
-            return _context.Products
+            var product = _context.Products
                 .Include(p => p.Category) // "жадная загрузка" - механизм EF
-                .Include(p=> p.Brand) // "жадная загрузка" - механизм EF
+                .Include(p => p.Brand) // "жадная загрузка" - механизм EF
                 .FirstOrDefault(p => p.Id == id);
+            return new ProductDTO
+            {
+                Id = product.Id,
+                Name = product.Name,
+                ImageUrl = product.ImageUrl,
+                Order = product.Order,
+                Price = product.Price,
+                Brand = new BrandDTO
+                {
+                    Id = product.Brand.Id,
+                    Name = product.Brand.Name
+                }
+            };
         }
 
-        public IEnumerable<Product> GetProducts(ProductFilter filter)
+        public IEnumerable<ProductDTO> GetProducts(ProductFilter filter)
         {
             var query = _context.Products
                 .Include(p=> p.Category)
@@ -53,10 +67,23 @@ namespace WebShopSOA.Services.ShopProduct
                 query = query.Where(c => c.CategoryId.Equals(filter.CategoryId.Value));
             }
 
-            return query.ToList();
+            return query.ToList().Select(p => 
+            new ProductDTO
+            {
+                Id = p.Id,
+                Name = p.Name,
+                ImageUrl = p.ImageUrl,
+                Order = p.Order,
+                Price = p.Price,
+                Brand = new BrandDTO
+                {
+                    Id = p.Brand.Id,
+                    Name = p.Brand.Name
+                }
+            });
         }
 
-        public void EditProduct(Product product)
+        public void EditProduct(ProductDTO product)
         {
             var DbProduct = _context.Products.First(p => p.Id == product.Id);
 
@@ -67,7 +94,18 @@ namespace WebShopSOA.Services.ShopProduct
             }
             else
             {
-                _context.Products.Add(product);
+                _context.Products.Add(new Product
+                {
+                    Name = product.Name,
+                    ImageUrl = product.ImageUrl,
+                    Order = product.Order,
+                    Price = product.Price,
+                    Brand = new Brand
+                    {
+                        Id = product.Brand.Id,
+                        Name = product.Brand.Name
+                    }
+                });
             }
 
             _context.SaveChanges();

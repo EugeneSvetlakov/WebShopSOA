@@ -9,6 +9,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using WebShopSOA.Clients.Employees;
 using WebShopSOA.Clients.Values;
 using WebShopSOA.DAL;
 using WebShopSOA.Domain.Entities;
@@ -36,7 +37,10 @@ namespace WebShopSOA
                 options.Filters.Add(new SimpleActionFilterAttribute());
             });
 
-            services.AddSingleton<IEmployeeService, EmployeeService>();
+            services.AddDbContext<WebShopSOADbContext>(options => options.UseSqlServer(
+                Configuration.GetConnectionString("DefaultConnection")));
+
+            services.AddSingleton<IEmployeeService, EmployeesClient>();
             services.AddScoped<IProductService, SqlProductService>(); // Данные из БД
             services.AddScoped<IOrderService, SqlOrderService>(); // Данные из БД
 

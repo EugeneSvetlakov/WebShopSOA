@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using WebShopSOA.Domain.DTO.Products;
 using WebShopSOA.Domain.Entities;
 using WebShopSOA.Domain.Filters;
 using WebShopSOA.Domain.ViewModels;
@@ -14,14 +15,14 @@ namespace WebShopSOA.Interfaces.Services
 
         IEnumerable<Category> GetCategories();
 
-        IEnumerable<Product> GetProducts(ProductFilter filter);
+        IEnumerable<ProductDTO> GetProducts(ProductFilter filter);
 
         // CRUD Product
         // Create/Update
-        void EditProduct(Product product);
+        void EditProduct(ProductDTO product);
 
         // Read
-        Product GetProductById(int id);
+        ProductDTO GetProductById(int id);
 
         // Delete
         void DeleteProduct(int id);
