@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using WebShopSOA.Interfaces.Services;
 using WebShopSOA.Interfaces.Services;
 using WebShopSOA.Domain.ViewModels;
+using WebShopSOA.Domain.DTO.Order;
 
 namespace WebShopSOA.Controllers
 {
@@ -65,9 +66,19 @@ namespace WebShopSOA.Controllers
         {
             if (ModelState.IsValid)
             {
+                var createOrderModel = new CreateOrderModel
+                {
+                    OrderViewModel = model,
+                    OrderItems = _cartService.TransformCart().Items
+                    .Select(i => new OrderItemDTO
+                    {
+                        Id = i.Key.Id,
+                        Quantity = i.Value,
+                        Price = i.Key.Price
+                    }).ToList()
+                };
                 var orderResult = _orderService.CreateOrder(
-                    model, 
-                    _cartService.TransformCart(), 
+                    createOrderModel, 
                     User.Identity.Name);
 
                 _cartService.RemoveAll();
