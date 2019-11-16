@@ -9,6 +9,7 @@ using WebShopSOA.Domain.Entities;
 using WebShopSOA.Interfaces.Services;
 using WebShopSOA.Domain.ViewModels;
 using WebShopSOA.Domain.DTO.Order;
+using WebShopSOA.Services.Map;
 
 namespace WebShopSOA.Services.ShopProduct
 {
@@ -30,20 +31,7 @@ namespace WebShopSOA.Services.ShopProduct
                 .Include(o=> o.OrderItems)
                 .Where(o => o.User.UserName == UserName)
                 .ToList().
-                Select(o => new OrderDTO
-                {
-                    Id = o.Id,
-                    Name = o.Name,
-                    Address = o.Address,
-                    Date = o.Date,
-                    Phone = o.Phone,
-                    OrderItems = o.OrderItems.Select(item => new OrderItemDTO
-                    {
-                        Id = item.Id,
-                        Price = item.Price,
-                        Quantity = item.Quantity
-                    })
-                });
+                Select(OrderMapper.ToDTO);
         }
 
         public OrderDTO GetOrderById(int id)
@@ -52,20 +40,7 @@ namespace WebShopSOA.Services.ShopProduct
                 .Include(o => o.User)
                 .Include(o => o.OrderItems)
                 .FirstOrDefault(o => o.Id == id);
-            return new OrderDTO
-            {
-                Id = order.Id,
-                Name = order.Name,
-                Address = order.Address,
-                Date = order.Date,
-                Phone = order.Phone,
-                OrderItems = order.OrderItems.Select(item => new OrderItemDTO
-                {
-                    Id = item.Id,
-                    Price = item.Price,
-                    Quantity = item.Quantity
-                })
-            };
+            return order.ToDTO();
         }
 
         public OrderDTO CreateOrder(CreateOrderModel OrderModel, string UserName)
@@ -110,20 +85,7 @@ namespace WebShopSOA.Services.ShopProduct
                 _context.SaveChanges();
                 trans.Commit();
 
-                return new OrderDTO
-                {
-                    Id = order.Id,
-                    Name = order.Name,
-                    Address = order.Address,
-                    Date = order.Date,
-                    Phone = order.Phone,
-                    OrderItems = order.OrderItems.Select(item => new OrderItemDTO
-                    {
-                        Id = item.Id,
-                        Price = item.Price,
-                        Quantity = item.Quantity
-                    })
-                };
+                return order.ToDTO();
             }
         }
     }

@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using WebShopSOA.Domain.Filters;
 using WebShopSOA.Interfaces.Services;
 using WebShopSOA.Domain.ViewModels;
+using WebShopSOA.Services.Map;
 
 namespace WebShopSOA.ViewComponents
 {
@@ -28,7 +29,7 @@ namespace WebShopSOA.ViewComponents
         private List<BrandViewModel> GetBrands()
         {
             // Получаем список Брэндов
-            var brands = _productService.GetBrands();
+            var brands = _productService.GetBrands().Select(BrandMapper.FromDTO);
 
             // Заполняем BrandViewModels
             var BrandViewModels = new List<BrandViewModel>();

@@ -38,10 +38,10 @@ namespace WebShopSOA.ServiceHosting.Controllers
             _ProductService.DeleteProduct(id);
 
         [HttpGet("brands")]
-        public IEnumerable<Brand> GetBrands() => 
+        public IEnumerable<BrandDTO> GetBrands() => 
             _ProductService.GetBrands();
 
         [HttpGet("categoryes")]
-        public IEnumerable<Category> GetCategories() => _ProductService.GetCategories();
+        public IEnumerable<CategoryDTO> GetCategories() => _ProductService.GetCategories();
     }
 }

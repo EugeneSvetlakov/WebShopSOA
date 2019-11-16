@@ -14,6 +14,12 @@ namespace WebShopSOA.Domain.DTO.Products
 
         public decimal Price { get; set; }
 
+        public int? BrandId { get; set; }
+
         public BrandDTO Brand { get; set; }
+
+        public int CategoryId { get; set; }
+
+        public CategoryDTO Category { get; set; }
     }
 }

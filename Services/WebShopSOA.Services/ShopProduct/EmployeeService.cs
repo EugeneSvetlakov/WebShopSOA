@@ -4,15 +4,19 @@ using System.Linq;
 using System.Threading.Tasks;
 using WebShopSOA.Interfaces.Services;
 using WebShopSOA.Domain.ViewModels;
+using Microsoft.Extensions.Logging;
 
 namespace WebShopSOA.Services.ShopProduct
 {
     public class EmployeeService : IEmployeeService
     {
         private readonly List<EmployeeView> _employees;
+        private readonly ILogger<EmployeeService> _Logger;
 
-        public EmployeeService()
+        public EmployeeService(ILogger<EmployeeService> Logger)
         {
+            _Logger = Logger;
+
             _employees = new List<EmployeeView>
             {
                 new EmployeeView
@@ -46,8 +50,17 @@ namespace WebShopSOA.Services.ShopProduct
 
         public void AddNew(EmployeeView model)
         {
+            if (model is null) throw new ArgumentNullException(nameof(model));
+
+            if (_employees.Contains(model) || _employees.Any(e => e.Id == model.Id))
+            {
+                _Logger.LogWarning($"Попытка добавить сотрудника с id:{model.Id}, который уже существует.");
+                return;
+            }
+
             model.Id = _employees.Max(e => e.Id) + 1;
             _employees.Add(model);
+            _Logger.LogInformation($"Добавлен новый сотрудник с id:{model.Id}");
         }
 
         public EmployeeView Update(int id, EmployeeView employee)

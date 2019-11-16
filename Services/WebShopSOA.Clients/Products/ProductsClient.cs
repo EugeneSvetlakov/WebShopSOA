@@ -30,10 +30,10 @@ namespace WebShopSOA.Clients.Products
         public void DeleteProduct(int id) =>
             Delete($"{_ServiceAddress}/{id}");
 
-        public IEnumerable<Brand> GetBrands() =>
-            Get<List<Brand>>($"{_ServiceAddress}/brands");
+        public IEnumerable<BrandDTO> GetBrands() =>
+            Get<List<BrandDTO>>($"{_ServiceAddress}/brands");
 
-        public IEnumerable<Category> GetCategories() =>
-            Get<List<Category>>($"{_ServiceAddress}/categoryes");
+        public IEnumerable<CategoryDTO> GetCategories() =>
+            Get<List<CategoryDTO>>($"{_ServiceAddress}/categoryes");
     }
 }

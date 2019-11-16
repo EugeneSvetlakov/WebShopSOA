@@ -11,9 +11,9 @@ namespace WebShopSOA.Interfaces.Services
 {
     public interface IProductService
     {
-        IEnumerable<Brand> GetBrands();
+        IEnumerable<BrandDTO> GetBrands();
 
-        IEnumerable<Category> GetCategories();
+        IEnumerable<CategoryDTO> GetCategories();
 
         IEnumerable<ProductDTO> GetProducts(ProductFilter filter);
 

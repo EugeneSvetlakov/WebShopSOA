@@ -8,6 +8,7 @@ using WebShopSOA.Domain.DTO.Products;
 using WebShopSOA.Domain.Entities;
 using WebShopSOA.Domain.Filters;
 using WebShopSOA.Interfaces.Services;
+using WebShopSOA.Services.Map;
 
 namespace WebShopSOA.Services.ShopProduct
 {
@@ -20,19 +21,21 @@ namespace WebShopSOA.Services.ShopProduct
             this._context = context;
         }
 
-        public IEnumerable<Brand> GetBrands()
+        public IEnumerable<BrandDTO> GetBrands()
         {
             return _context
                 .Brands
-                //.Include(p => p.Products) // "жадная загрузка" Продуктов - механизм EF
+                .Include(p => p.Products) // "жадная загрузка" Продуктов - механизм EF
+                .Select(BrandMapper.ToDTO)
                 .ToList();
         }
 
-        public IEnumerable<Category> GetCategories()
+        public IEnumerable<CategoryDTO> GetCategories()
         {
             return _context
                 .Categories
-                //.Include(p => p.Products) // "жадная загрузка" Продуктов - механизм EF
+                .Include(p => p.Products) // "жадная загрузка" Продуктов - механизм EF
+                .Select(CategoryMapper.ToDTO)
                 .ToList();
         }
 
@@ -42,19 +45,7 @@ namespace WebShopSOA.Services.ShopProduct
                 .Include(p => p.Category) // "жадная загрузка" Категорий - механизм EF
                 .Include(p => p.Brand) // "жадная загрузка" Брэндов - механизм EF
                 .FirstOrDefault(p => p.Id == id);
-            return new ProductDTO
-            {
-                Id = product.Id,
-                Name = product.Name,
-                ImageUrl = product.ImageUrl,
-                Order = product.Order,
-                Price = product.Price,
-                Brand = new BrandDTO
-                {
-                    Id = product.Brand.Id,
-                    Name = product.Brand.Name
-                }
-            };
+            return product.ToDTO();
         }
 
         public IEnumerable<ProductDTO> GetProducts(ProductFilter filter)
@@ -72,20 +63,7 @@ namespace WebShopSOA.Services.ShopProduct
                 query = query.Where(c => c.CategoryId.Equals(filter.CategoryId.Value));
             }
 
-            return query.ToList().Select(p => 
-            new ProductDTO
-            {
-                Id = p.Id,
-                Name = p.Name,
-                ImageUrl = p.ImageUrl,
-                Order = p.Order,
-                Price = p.Price,
-                Brand = new BrandDTO
-                {
-                    Id = p.Brand.Id,
-                    Name = p.Brand.Name
-                }
-            });
+            return query.ToList().Select(ProductMapper.ToDTO);
         }
 
         public void EditProduct(ProductDTO product)
