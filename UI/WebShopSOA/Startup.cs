@@ -10,6 +10,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using WebShopSOA.Clients.Employees;
+using WebShopSOA.Clients.Orders;
 using WebShopSOA.Clients.Products;
 using WebShopSOA.Clients.Values;
 using WebShopSOA.DAL;
@@ -43,15 +44,17 @@ namespace WebShopSOA
 
             services.AddSingleton<IEmployeeService, EmployeesClient>();
             services.AddScoped<IProductService, ProductsClient>(); // Данные из БД
-            services.AddScoped<IOrderService, SqlOrderService>(); // Данные из БД
+            services.AddScoped<IOrderService, OrdersClient>(); // Данные из БД
 
             services.AddScoped<IValuesService, ValuesClient>(); // Get Data throught Api Testing release
             
             // подключенеи аутентификации
-            services.AddIdentity<User, IdentityRole>()
+            services.AddIdentity<User, IdentityRole>(options => 
+            {
+                //Конфигурация возможна здесь
+            })
                 .AddEntityFrameworkStores<WebShopSOADbContext>()
-                .AddDefaultTokenProviders()
-                ;
+                .AddDefaultTokenProviders();
             
             // доп настройка сервиса Аутентификации
             services.Configure<IdentityOptions>(o => {

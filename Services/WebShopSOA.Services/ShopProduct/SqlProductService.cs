@@ -20,22 +20,27 @@ namespace WebShopSOA.Services.ShopProduct
             this._context = context;
         }
 
-
         public IEnumerable<Brand> GetBrands()
         {
-            return _context.Brands.ToList();
+            return _context
+                .Brands
+                //.Include(p => p.Products) // "жадная загрузка" Продуктов - механизм EF
+                .ToList();
         }
 
         public IEnumerable<Category> GetCategories()
         {
-            return _context.Categories.ToList();
+            return _context
+                .Categories
+                //.Include(p => p.Products) // "жадная загрузка" Продуктов - механизм EF
+                .ToList();
         }
 
         public ProductDTO GetProductById(int id)
         {
             var product = _context.Products
-                .Include(p => p.Category) // "жадная загрузка" - механизм EF
-                .Include(p => p.Brand) // "жадная загрузка" - механизм EF
+                .Include(p => p.Category) // "жадная загрузка" Категорий - механизм EF
+                .Include(p => p.Brand) // "жадная загрузка" Брэндов - механизм EF
                 .FirstOrDefault(p => p.Id == id);
             return new ProductDTO
             {
