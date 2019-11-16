@@ -34,6 +34,6 @@ namespace WebShopSOA.Clients.Products
             Get<List<BrandDTO>>($"{_ServiceAddress}/brands");
 
         public IEnumerable<CategoryDTO> GetCategories() =>
-            Get<List<CategoryDTO>>($"{_ServiceAddress}/categoryes");
+            Get<List<CategoryDTO>>($"{_ServiceAddress}/categories");
     }
 }

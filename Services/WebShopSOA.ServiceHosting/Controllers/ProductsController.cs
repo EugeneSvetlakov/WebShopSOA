@@ -41,7 +41,7 @@ namespace WebShopSOA.ServiceHosting.Controllers
         public IEnumerable<BrandDTO> GetBrands() => 
             _ProductService.GetBrands();
 
-        [HttpGet("categoryes")]
+        [HttpGet("categories")]
         public IEnumerable<CategoryDTO> GetCategories() => _ProductService.GetCategories();
     }
 }
