@@ -5,7 +5,6 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using WebShopSOA.Interfaces.Services;
-using WebShopSOA.Interfaces.Services;
 using WebShopSOA.Domain.ViewModels;
 using WebShopSOA.Domain.DTO.Order;
 

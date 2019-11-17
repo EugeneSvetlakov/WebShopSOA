@@ -453,7 +453,7 @@ namespace WebShopSOA.Services.ShopProduct
             return product.ToDTO();
         }
 
-        public void EditProduct(ProductDTO product)
+        public void EditProduct(int id, ProductDTO product)
         {
             throw new NotImplementedException();
         }

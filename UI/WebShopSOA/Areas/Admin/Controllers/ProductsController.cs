@@ -44,7 +44,7 @@ namespace WebShopSOA.Areas.Admin.Controllers
         [HttpPost]
         [Route("edit/{id?}")]
         [Authorize(Roles = "Administrators")]
-        public IActionResult Edit(ProductDTO model)
+        public IActionResult Edit(int id, ProductDTO model)
         {
 
             if (!ModelState.IsValid)
@@ -52,7 +52,7 @@ namespace WebShopSOA.Areas.Admin.Controllers
                 return View(model);
             }
 
-            _productService.EditProduct(model);
+            _productService.EditProduct(id, model);
 
             //_productService.UpdateProduct(model);
 

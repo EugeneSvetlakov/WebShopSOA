@@ -24,8 +24,8 @@ namespace WebShopSOA.Clients.Products
         public ProductDTO GetProductById(int id) =>
             Get<ProductDTO>($"{_ServiceAddress}/{id}");
 
-        public void EditProduct(ProductDTO product) =>
-            Post(_ServiceAddress, product);
+        public void EditProduct(int id, ProductDTO product) =>
+            Post($"{_ServiceAddress}/{id}", product);
 
         public void DeleteProduct(int id) =>
             Delete($"{_ServiceAddress}/{id}");

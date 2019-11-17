@@ -31,9 +31,11 @@ namespace WebShopSOA.ServiceHosting.Controllers
         public ProductDTO GetProductById(int id) => 
             _ProductService.GetProductById(id);
 
-        public void EditProduct(ProductDTO product) => 
-            _ProductService.EditProduct(product);
+        [HttpPut("{id}"), ActionName("Put")]
+        public void EditProduct(int id, [FromBody] ProductDTO product) => 
+            _ProductService.EditProduct(id, product);
 
+        [HttpDelete("{id}")]
         public void DeleteProduct(int id) => 
             _ProductService.DeleteProduct(id);
 

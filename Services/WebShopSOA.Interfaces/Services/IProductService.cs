@@ -19,7 +19,7 @@ namespace WebShopSOA.Interfaces.Services
 
         // CRUD Product
         // Create/Update
-        void EditProduct(ProductDTO product);
+        void EditProduct(int id, ProductDTO product);
 
         // Read
         ProductDTO GetProductById(int id);

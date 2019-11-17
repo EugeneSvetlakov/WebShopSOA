@@ -66,11 +66,11 @@ namespace WebShopSOA.Services.ShopProduct
             return query.ToList().Select(ProductMapper.ToDTO);
         }
 
-        public void EditProduct(ProductDTO product)
+        public void EditProduct(int id, ProductDTO product)
         {
             var DbProduct = _context.Products.First(p => p.Id == product.Id);
 
-            if(product.Id == DbProduct.Id)
+            if(id == DbProduct.Id)
             {
                 DbProduct.Name = product.Name;
                 DbProduct.Price = product.Price;
