@@ -14,7 +14,10 @@ using WebShopSOA.Domain.Entities;
 
 namespace WebShopSOA.ServiceHosting.Controllers
 {
-    //[Route("api/[controller]")]
+    [Produces("application/json")]
+    // [Produces("application/json")]
+    // Формат получения и отдачи данных (json is default format), 
+    // так же может конфигурироваться в настройках самого приложения
     [Route("api/users")]
     [ApiController]
     public class UsersController : ControllerBase
