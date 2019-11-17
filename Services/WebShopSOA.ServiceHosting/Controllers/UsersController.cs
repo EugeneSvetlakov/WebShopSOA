@@ -63,14 +63,14 @@ namespace WebShopSOA.ServiceHosting.Controllers
                 throw new ArgumentNullException(nameof(user));
             }
 
-            using (_Logger.BeginScope("Создание нового пользователя {0}", user.UserName))
+            using (_Logger.BeginScope($"Создание нового пользователя {user.UserName}: "))
             {
                 var creation_result = await _UserStore.CreateAsync(user);
 
                 if (creation_result.Succeeded)
-                    _Logger.LogInformation("Пользователь {0} успешно создан", user.UserName);
+                    _Logger.LogInformation($"Пользователь {user.UserName} успешно создан");
                 else
-                    _Logger.LogWarning("При создании пользователя {0} возникли ошибки: {1}",
+                    _Logger.LogWarning($"При создании пользователя {0} возникли ошибки: {1}",
                         user.UserName,
                         string.Join(", ", creation_result.Errors.Select(e => e.Description)));
 
