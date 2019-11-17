@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace WebShopSOA.Clients.Base
 {
-    public abstract class BaseClient
+    public abstract class BaseClient : IDisposable
     {
         protected readonly HttpClient _Client;
 
@@ -61,5 +61,19 @@ namespace WebShopSOA.Clients.Base
 
         protected async Task<HttpResponseMessage> DeleteAsync(string url, CancellationToken Cancell = default) => 
             await _Client.DeleteAsync(url, Cancell);
+
+        #region IDisposable
+        public void Dispose() => Dispose(true);
+
+        private bool _Disposed;
+
+        protected virtual void Dispose(bool Disposing)
+        {
+            if (!Disposing || _Disposed) return;
+            _Disposed = true;
+            _Client.Dispose();
+            GC.SuppressFinalize(this);
+        }
+        #endregion
     }
 }

@@ -215,7 +215,7 @@ namespace WebShopSOA.ServiceHosting.Controllers
             await _UserStore.GetLockoutEndDateAsync(user);
 
         [HttpPost("SetLockoutEndDate")]
-        public async Task SetLockoutEndDateAsync([FromBody] SetLockOutDTO LocoutInfo) =>
+        public async Task SetLockoutEndDateAsync([FromBody] SetLockoutDTO LocoutInfo) =>
             await _UserStore.SetLockoutEndDateAsync(LocoutInfo.User, LocoutInfo.LockOutEnd);
 
         [HttpPost("IncrementAccessFailedCount")]
