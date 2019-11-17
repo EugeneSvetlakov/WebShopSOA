@@ -53,7 +53,8 @@ namespace WebShopSOA.ServiceHosting
             services.AddSwaggerGen(opt =>
             {
                 opt.SwaggerDoc("v1", new Info { Title = "WebShopSOA.API ver.1", Version = "v1" });
-                //opt.IncludeXmlComments("WebShopSOA.ServiceHosting.xml"); // xml документация, генерируется самой MS Visual Studio на основе комментариев в коде
+                opt.IncludeXmlComments("WebShopSOA.ServiceHosting.xml"); // xml документация, генерируется самой MS Visual Studio на основе комментариев в коде
+                opt.IncludeXmlComments(@"bin\Debug\netcoreapp2.2\WebShopSOA.Domain.xml"); // xml документация, генерируется самой MS Visual Studio на основе комментариев в коде
             });
         }
 
