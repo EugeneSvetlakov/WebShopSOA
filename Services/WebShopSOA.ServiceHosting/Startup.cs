@@ -15,6 +15,7 @@ using WebShopSOA.DAL;
 using WebShopSOA.Domain.Entities;
 using WebShopSOA.Interfaces.Services;
 using WebShopSOA.Services.ShopProduct;
+using Swashbuckle.AspNetCore.Swagger;
 
 namespace WebShopSOA.ServiceHosting
 {
@@ -30,6 +31,8 @@ namespace WebShopSOA.ServiceHosting
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+              
+
             services.AddDbContext<WebShopSOADbContext>(options => options.UseSqlServer(
                 Configuration.GetConnectionString("DefaultConnection")));
 
@@ -46,6 +49,12 @@ namespace WebShopSOA.ServiceHosting
             services.AddScoped<IOrderService, SqlOrderService>(); // Данные из БД
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
+
+            services.AddSwaggerGen(opt =>
+            {
+                opt.SwaggerDoc("v1", new Info { Title = "WebShopSOA.API ver.1", Version = "v1" });
+                //opt.IncludeXmlComments("WebShopSOA.ServiceHosting.xml"); // xml документация, генерируется самой MS Visual Studio на основе комментариев в коде
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -55,6 +64,16 @@ namespace WebShopSOA.ServiceHosting
             {
                 app.UseDeveloperExceptionPage();
             }
+
+            app.UseSwagger(c =>
+            {
+                c.RouteTemplate = "api-docs/{documentName}/swagger.json";
+            });
+            app.UseSwaggerUI(opt =>
+            {
+                opt.SwaggerEndpoint("api-docs/v1/swagger.json", "WebShopSOA.API v1");
+                opt.RoutePrefix = string.Empty;
+            }); // Пользовательский интерфейс Swagger
 
             app.UseMvc();
         }
