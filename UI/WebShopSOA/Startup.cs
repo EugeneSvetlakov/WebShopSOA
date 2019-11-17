@@ -10,6 +10,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using WebShopSOA.Clients.Employees;
+using WebShopSOA.Clients.Identity;
 using WebShopSOA.Clients.Orders;
 using WebShopSOA.Clients.Products;
 using WebShopSOA.Clients.Values;
@@ -39,25 +40,17 @@ namespace WebShopSOA
                 options.Filters.Add(new SimpleActionFilterAttribute());
             });
 
-            services.AddDbContext<WebShopSOADbContext>(options => options.UseSqlServer(
-                Configuration.GetConnectionString("DefaultConnection")));
-
             services.AddSingleton<IEmployeeService, EmployeesClient>();
             services.AddScoped<IProductService, ProductsClient>(); // Данные из БД
             services.AddScoped<IOrderService, OrdersClient>(); // Данные из БД
 
             services.AddScoped<IValuesService, ValuesClient>(); // Get Data throught Api Testing release
-            
-            // подключенеи аутентификации
-            services.AddIdentity<User, IdentityRole>(options => 
+
+            #region Custom Identity Implementation
+
+            //// доп настройка сервиса Аутентификации
+            services.Configure<IdentityOptions>(o =>
             {
-                //Конфигурация возможна здесь
-            })
-                .AddEntityFrameworkStores<WebShopSOADbContext>()
-                .AddDefaultTokenProviders();
-            
-            // доп настройка сервиса Аутентификации
-            services.Configure<IdentityOptions>(o => {
                 o.Password.RequiredLength = 3;
                 o.Password.RequireDigit = false;
                 o.Password.RequireLowercase = false;
@@ -65,6 +58,23 @@ namespace WebShopSOA
                 o.Password.RequireUppercase = false;
                 o.User.RequireUniqueEmail = true;
             });
+
+            services.AddIdentity<User, IdentityRole>()
+                .AddDefaultTokenProviders();
+            
+            services.AddTransient<IUserStore<User>, UsersClient>();
+            services.AddTransient<IUserRoleStore<User>, UsersClient>();
+            services.AddTransient<IUserClaimStore<User>, UsersClient>();
+            services.AddTransient<IUserPasswordStore<User>, UsersClient>();
+            services.AddTransient<IUserEmailStore<User>, UsersClient>();
+            services.AddTransient<IUserPhoneNumberStore<User>, UsersClient>();
+            services.AddTransient<IUserTwoFactorStore<User>, UsersClient>();
+            services.AddTransient<IUserLoginStore<User>, UsersClient>();
+            services.AddTransient<IUserLockoutStore<User>, UsersClient>();
+
+            services.AddTransient<IRoleStore<IdentityRole>, RolesClient>();
+
+            #endregion
 
             services.ConfigureApplicationCookie(o => {
                 o.Cookie.Expiration = TimeSpan.FromDays(100);
