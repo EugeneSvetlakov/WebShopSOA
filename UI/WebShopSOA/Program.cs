@@ -18,25 +18,6 @@ namespace WebShopSOA
         {
             var host = BuildWebHost(args);
 
-            using (var scope = host.Services.CreateScope()) // Нужно для получения DbContext
-            {
-                var services = scope.ServiceProvider;
-
-                try
-                {
-                    WebShopSOADbContext context = services.GetRequiredService<WebShopSOADbContext>();
-
-                    DbInitializer.Initialize(context);
-
-                    DbInitializer.InitializeUsers(services);
-                }
-                catch (Exception ex)
-                {
-                    var logger = services.GetRequiredService<ILogger<Program>>();
-                    logger.LogError(ex, "Oops... Something went wrong at Db Initializing...");
-                }
-            }
-
             host.Run();
         }
 

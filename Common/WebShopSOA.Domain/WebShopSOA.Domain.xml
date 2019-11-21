@@ -24,6 +24,16 @@
             Категория товара
             </summary>
         </member>
+        <member name="P:WebShopSOA.Domain.DTO.Products.CategoryDTO.ParentId">
+            <summary>
+            Идентификатор родительской категории
+            </summary>
+        </member>
+        <member name="P:WebShopSOA.Domain.DTO.Products.CategoryDTO.Order">
+            <summary>
+            Порядок (для сортировки)
+            </summary>
+        </member>
         <member name="T:WebShopSOA.Domain.DTO.Products.ProductDTO">
             <summary>
             Товар
