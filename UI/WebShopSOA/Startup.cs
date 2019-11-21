@@ -22,7 +22,6 @@ using WebShopSOA.Interfaces.Api;
 using WebShopSOA.Interfaces.Services;
 using WebShopSOA.Services.ShopProduct;
 using WebShopSOA.Log4Net;
-using WebShopSOA.Infrastructure.Middleware;
 
 namespace WebShopSOA
 {
@@ -101,9 +100,6 @@ namespace WebShopSOA
             app.UseStaticFiles();
 
             app.UseAuthentication(); // !!! размещать после UseStaticFiles()
-
-            app.UseMiddleware<ErrorHandlingMiddleware>(); // Добавлние промежуточного ПО
-            //app.UseMiddleware(typeof(ErrorHandlingMiddleware)); //Второй вариант добавления промежуточного ПО
 
             //app.UseMvcWithDefaultRoute();
             // Конфигурация инфраструктуры MVC
