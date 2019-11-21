@@ -15,6 +15,7 @@
 
   <ItemGroup>
     <PackageReference Include="BuildBundlerMinifier" Version="3.0.415" />
+    <PackageReference Include="log4net" Version="2.0.8" />
     <PackageReference Include="Microsoft.AspNetCore.App" />
     <PackageReference Include="Microsoft.AspNetCore.Identity" Version="2.2.0" />
     <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="2.2.0" />
@@ -49,10 +50,17 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\Common\WebShopSOA.Domain\WebShopSOA.Domain.csproj" />
+    <ProjectReference Include="..\..\Common\WebShopSOA.Logging\WebShopSOA.Logging.csproj" />
     <ProjectReference Include="..\..\Services\WebShopSOA.Clients\WebShopSOA.Clients.csproj" />
     <ProjectReference Include="..\..\Services\WebShopSOA.DAL\WebShopSOA.DAL.csproj" />
     <ProjectReference Include="..\..\Services\WebShopSOA.Interfaces\WebShopSOA.Interfaces.csproj" />
     <ProjectReference Include="..\..\Services\WebShopSOA.Services\WebShopSOA.Services.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Update="log4net.config">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
 
 </Project>
