@@ -1,0 +1,40 @@
+﻿@model IEnumerable<WebShopSOA.Domain.ViewModels.CategoryViewModel>
+
+<h2>Категории</h2>
+<!--category-productsr-->
+<div class="panel-group category-products" id="accordian">
+    @foreach (var parentCategory in Model)
+    {
+        if (parentCategory.ChildCategories.Count > 0)
+        {
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h4 class="panel-title">
+                        <a data-toggle="collapse" data-parent="#accordian" href="#@parentCategory.Name.ToLower()">
+                            <span class="badge pull-right"><i class="fa fa-plus"></i></span>
+                            @parentCategory.Name
+                        </a>
+                    </h4>
+                </div>
+                <div id="@parentCategory.Name.ToLower()" class="panel-collapse collapse">
+                    <div class="panel-body">
+                        <ul>
+                            @foreach (var childCategory in parentCategory.ChildCategories)
+                            {
+                                <li><a asp-controller="Catalog" asp-action="Products" asp-route-CategoryId="@childCategory.Id">@childCategory.Name</a></li>
+                            }
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        }
+        else
+        {
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h4 class="panel-title"><a asp-controller="Catalog" asp-action="Products" asp-route-CategoryId="@parentCategory.Id">@parentCategory.Name</a></h4>
+                </div>
+            </div>
+        }
+    }
+</div><!--/category-productsr-->

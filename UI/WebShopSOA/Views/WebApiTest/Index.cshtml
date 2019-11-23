@@ -1,0 +1,15 @@
+﻿@model IEnumerable<string>
+
+@{
+    ViewData["Title"] = "Test WebApi Index";
+}
+
+<h1>WebApi Test</h1>
+
+<h4>Values: </h4>
+<ul>
+    @foreach (var value in Model)
+    {
+        <li>@value</li>
+    }
+</ul>
