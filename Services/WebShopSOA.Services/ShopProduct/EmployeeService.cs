@@ -50,6 +50,24 @@ namespace WebShopSOA.Services.ShopProduct
             _employees.Add(model);
         }
 
+        public EmployeeView Update(int id, EmployeeView employee)
+        {
+            if (employee == null)
+                throw new ArgumentNullException(nameof(employee));
+
+            var employeeDb = GetById(id);
+
+            if (employeeDb == null)
+                throw new InvalidOperationException($"Сотрудник с id:{id} не найден.");
+
+            employeeDb.FirstName = employee.FirstName;
+            employeeDb.LastName = employee.LastName;
+            employeeDb.Patronymic = employee.Patronymic;
+            employeeDb.Age = employee.Age;
+
+            return employeeDb;
+        }
+
         public void Commit()
         {
             //throw new NotImplementedException();

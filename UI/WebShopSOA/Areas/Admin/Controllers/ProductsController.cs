@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using WebShopSOA.Domain.DTO.Products;
 using WebShopSOA.Domain.Entities;
 using WebShopSOA.Domain.Filters;
 using WebShopSOA.Interfaces.Services;
@@ -33,7 +34,7 @@ namespace WebShopSOA.Areas.Admin.Controllers
             if (!id.HasValue)
                 return View(new Product());
 
-            Product model = _productService.GetProductById(id.Value);
+            ProductDTO model = _productService.GetProductById(id.Value);
             if (model == null)
                 return NotFound(); // Возвращаем результат 404 Not Found
 
@@ -43,7 +44,7 @@ namespace WebShopSOA.Areas.Admin.Controllers
         [HttpPost]
         [Route("edit/{id?}")]
         [Authorize(Roles = "Administrators")]
-        public IActionResult Edit(Product model)
+        public IActionResult Edit(ProductDTO model)
         {
 
             if (!ModelState.IsValid)

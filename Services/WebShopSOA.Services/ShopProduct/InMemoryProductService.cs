@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using WebShopSOA.Domain.DTO.Products;
 using WebShopSOA.Domain.Entities;
 using WebShopSOA.Domain.Filters;
 using WebShopSOA.Interfaces.Services;
@@ -427,7 +428,7 @@ namespace WebShopSOA.Services.ShopProduct
         /// </summary>
         /// <param name="filter">Фильтр товаров</param>
         /// <returns></returns>
-        public IEnumerable<Product> GetProducts(ProductFilter filter)
+        public IEnumerable<ProductDTO> GetProducts(ProductFilter filter)
         {
             var products = _products;
             if (filter.CategoryId.HasValue)
@@ -441,15 +442,41 @@ namespace WebShopSOA.Services.ShopProduct
                         p.BrandId.HasValue && p.BrandId.Value.Equals(filter.BrandId.Value))
                     .ToList();
             }
-            return products;
+            return products.
+                Select(p => new ProductDTO
+                {
+                    Id = p.Id,
+                    Name = p.Name,
+                    ImageUrl = p.ImageUrl,
+                    Order = p.Order,
+                    Price = p.Price,
+                    Brand = p.Brand is null ? null : new BrandDTO
+                    {
+                        Id = p.Brand.Id,
+                        Name = p.Brand.Name
+                    }
+                });
         }
 
-        public Product GetProductById(int id)
+        public ProductDTO GetProductById(int id)
         {
-            return _products.FirstOrDefault(p => p.Id == id);
+            var product = _products.FirstOrDefault(p => p.Id == id);
+            return new ProductDTO
+            {
+                Id = product.Id,
+                Name = product.Name,
+                ImageUrl = product.ImageUrl,
+                Order = product.Order,
+                Price = product.Price,
+                Brand = new BrandDTO
+                {
+                    Id = product.Brand.Id,
+                    Name = product.Brand.Name
+                }
+            };
         }
 
-        public void EditProduct(Product product)
+        public void EditProduct(ProductDTO product)
         {
             throw new NotImplementedException();
         }
