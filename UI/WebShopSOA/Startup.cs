@@ -9,6 +9,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
 using WebShopSOA.Clients.Employees;
 using WebShopSOA.Clients.Identity;
 using WebShopSOA.Clients.Orders;
@@ -20,6 +21,8 @@ using WebShopSOA.Infrastructure;
 using WebShopSOA.Interfaces.Api;
 using WebShopSOA.Interfaces.Services;
 using WebShopSOA.Services.ShopProduct;
+using WebShopSOA.Log4Net;
+using WebShopSOA.Infrastructure.Middleware;
 
 namespace WebShopSOA
 {
@@ -86,8 +89,10 @@ namespace WebShopSOA
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env)
+        public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory log)
         {
+            log.AddLog4Net();
+
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
@@ -96,6 +101,9 @@ namespace WebShopSOA
             app.UseStaticFiles();
 
             app.UseAuthentication(); // !!! размещать после UseStaticFiles()
+
+            app.UseMiddleware<ErrorHandlingMiddleware>(); // Добавлние промежуточного ПО
+            //app.UseMiddleware(typeof(ErrorHandlingMiddleware)); //Второй вариант добавления промежуточного ПО
 
             //app.UseMvcWithDefaultRoute();
             // Конфигурация инфраструктуры MVC

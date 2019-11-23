@@ -10,6 +10,7 @@ using WebShopSOA.Interfaces.Services;
 using WebShopSOA.Domain.ViewModels;
 using WebShopSOA.Domain.DTO.Order;
 using WebShopSOA.Services.Map;
+using Microsoft.Extensions.Logging;
 
 namespace WebShopSOA.Services.ShopProduct
 {
@@ -17,11 +18,13 @@ namespace WebShopSOA.Services.ShopProduct
     {
         private readonly WebShopSOADbContext _context;
         private readonly UserManager<User> _userManager;
+        private readonly ILogger<SqlOrderService> _Logger;
 
-        public SqlOrderService(WebShopSOADbContext context, UserManager<User> userManager)
+        public SqlOrderService(WebShopSOADbContext context, UserManager<User> userManager, ILogger<SqlOrderService> Logger)
         {
             _context = context;
             _userManager = userManager;
+            _Logger = Logger;
         }
 
         public IEnumerable<OrderDTO> GetUserOrders(string UserName)
@@ -84,6 +87,8 @@ namespace WebShopSOA.Services.ShopProduct
 
                 _context.SaveChanges();
                 trans.Commit();
+
+                _Logger.LogInformation("Заказ для пользователя {0} создан успешно, номер заказа {1}", user.UserName, order.Id);
 
                 return order.ToDTO();
             }
