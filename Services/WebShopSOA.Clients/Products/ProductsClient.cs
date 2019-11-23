@@ -24,16 +24,16 @@ namespace WebShopSOA.Clients.Products
         public ProductDTO GetProductById(int id) =>
             Get<ProductDTO>($"{_ServiceAddress}/{id}");
 
-        public void EditProduct(ProductDTO product) =>
-            Post(_ServiceAddress, product);
+        public void EditProduct(int id, ProductDTO product) =>
+            Post($"{_ServiceAddress}/{id}", product);
 
         public void DeleteProduct(int id) =>
             Delete($"{_ServiceAddress}/{id}");
 
-        public IEnumerable<Brand> GetBrands() =>
-            Get<List<Brand>>($"{_ServiceAddress}/brands");
+        public IEnumerable<BrandDTO> GetBrands() =>
+            Get<List<BrandDTO>>($"{_ServiceAddress}/brands");
 
-        public IEnumerable<Category> GetCategories() =>
-            Get<List<Category>>($"{_ServiceAddress}/categoryes");
+        public IEnumerable<CategoryDTO> GetCategories() =>
+            Get<List<CategoryDTO>>($"{_ServiceAddress}/categories");
     }
 }

@@ -11,15 +11,15 @@ namespace WebShopSOA.Interfaces.Services
 {
     public interface IProductService
     {
-        IEnumerable<Brand> GetBrands();
+        IEnumerable<BrandDTO> GetBrands();
 
-        IEnumerable<Category> GetCategories();
+        IEnumerable<CategoryDTO> GetCategories();
 
         IEnumerable<ProductDTO> GetProducts(ProductFilter filter);
 
         // CRUD Product
         // Create/Update
-        void EditProduct(ProductDTO product);
+        void EditProduct(int id, ProductDTO product);
 
         // Read
         ProductDTO GetProductById(int id);

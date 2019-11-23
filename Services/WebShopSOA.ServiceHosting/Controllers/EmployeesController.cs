@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
 using WebShopSOA.Domain.ViewModels;
 using WebShopSOA.Interfaces.Services;
 
@@ -15,10 +16,12 @@ namespace WebShopSOA.ServiceHosting.Controllers
     public class EmployeesController : ControllerBase, IEmployeeService
     {
         private readonly IEmployeeService _EmployeeService;
+        private readonly ILogger _Logger;
 
-        public EmployeesController(IEmployeeService EmployeeService)
+        public EmployeesController(IEmployeeService EmployeeService, ILogger Logger)
         {
             _EmployeeService = EmployeeService;
+            _Logger = Logger;
         }
 
         [HttpGet, ActionName("Get")]
@@ -28,7 +31,14 @@ namespace WebShopSOA.ServiceHosting.Controllers
         public EmployeeView GetById(int id) => _EmployeeService.GetById(id);
 
         [HttpPost, ActionName("Post")]
-        public void AddNew(EmployeeView model) => _EmployeeService.AddNew(model);
+        public void AddNew(EmployeeView model)
+        {
+            using (_Logger.BeginScope($"Добавление нового сотрудника с id:{model.Id}"))
+            {
+                _EmployeeService.AddNew(model);
+            }
+
+        }
 
         [HttpPut("{id}"), ActionName("Put")]
         public EmployeeView Update(int id, [FromBody] EmployeeView employee) => _EmployeeService.Update(id, employee);

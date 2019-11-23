@@ -8,6 +8,8 @@ using WebShopSOA.DAL;
 using WebShopSOA.Domain.Entities;
 using WebShopSOA.Interfaces.Services;
 using WebShopSOA.Domain.ViewModels;
+using WebShopSOA.Domain.DTO.Order;
+using WebShopSOA.Services.Map;
 
 namespace WebShopSOA.Services.ShopProduct
 {
@@ -22,24 +24,26 @@ namespace WebShopSOA.Services.ShopProduct
             _userManager = userManager;
         }
 
-        public IEnumerable<Order> GetUserOrders(string UserName)
+        public IEnumerable<OrderDTO> GetUserOrders(string UserName)
         {
             return _context.Orders
                 .Include(o=> o.User)
                 .Include(o=> o.OrderItems)
                 .Where(o => o.User.UserName == UserName)
-                .ToList();
+                .ToList().
+                Select(OrderMapper.ToDTO);
         }
 
-        public Order GetOrderById(int id)
+        public OrderDTO GetOrderById(int id)
         {
-            return _context.Orders
-                .Include(o=> o.User)
-                .Include(o=> o.OrderItems)
+            var order = _context.Orders
+                .Include(o => o.User)
+                .Include(o => o.OrderItems)
                 .FirstOrDefault(o => o.Id == id);
+            return order.ToDTO();
         }
 
-        public Order CreateOrder(OrderViewModel orderViewModel, CartViewModel cartViewModel, string UserName)
+        public OrderDTO CreateOrder(CreateOrderModel OrderModel, string UserName)
         {
             var user = _userManager
                 .FindByNameAsync(UserName)
@@ -49,30 +53,30 @@ namespace WebShopSOA.Services.ShopProduct
             {
                 var order = new Order()
                 {
-                    Name = orderViewModel.Name,
-                    Address = orderViewModel.Address,
+                    Name = OrderModel.OrderViewModel.Name,
+                    Address = OrderModel.OrderViewModel.Address,
                     Date = DateTime.Now,
-                    Phone = orderViewModel.Phone,
+                    Phone = OrderModel.OrderViewModel.Phone,
                     User = user
                 };
 
                 _context.Orders.Add(order);
 
-                foreach (var item in cartViewModel.Items)
+                foreach (var item in OrderModel.OrderItems)
                 {
-                    var productVm = item.Key;
+                    //var productVm = item.Id;
 
-                    var product = _context.Products.FirstOrDefault(p => p.Id == productVm.Id);
+                    var product = _context.Products.FirstOrDefault(p => p.Id == item.Id);
 
                     if (product == null)
-                        throw new InvalidOperationException("Товар не найден в БД");
+                        throw new InvalidOperationException($"Товар с id:{item.Id} не найден в БД");
 
                     var orderItem = new OrderItem()
                     {
                         Order = order,
                         Product = product,
                         Price = product.Price,
-                        Quantity = item.Value
+                        Quantity = item.Quantity
                     };
 
                     _context.OrderItems.Add(orderItem);
@@ -81,7 +85,7 @@ namespace WebShopSOA.Services.ShopProduct
                 _context.SaveChanges();
                 trans.Commit();
 
-                return order;
+                return order.ToDTO();
             }
         }
     }

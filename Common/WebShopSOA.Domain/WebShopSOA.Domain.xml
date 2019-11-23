@@ -1,0 +1,98 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>WebShopSOA.Domain</name>
+    </assembly>
+    <members>
+        <member name="T:WebShopSOA.Domain.DTO.Products.BrandDTO">
+            <summary>
+            Брэнд товара
+            </summary>
+        </member>
+        <member name="P:WebShopSOA.Domain.DTO.Products.BrandDTO.Id">
+            <summary>
+            Идентификатор
+            </summary>
+        </member>
+        <member name="P:WebShopSOA.Domain.DTO.Products.BrandDTO.Name">
+            <summary>
+            Наименование
+            </summary>
+        </member>
+        <member name="T:WebShopSOA.Domain.DTO.Products.CategoryDTO">
+            <summary>
+            Категория товара
+            </summary>
+        </member>
+        <member name="T:WebShopSOA.Domain.DTO.Products.ProductDTO">
+            <summary>
+            Товар
+            </summary>
+        </member>
+        <member name="P:WebShopSOA.Domain.DTO.Products.ProductDTO.Id">
+            <summary>
+            Идентификатор
+            </summary>
+        </member>
+        <member name="P:WebShopSOA.Domain.DTO.Products.ProductDTO.Name">
+            <summary>
+            Наименование товара
+            </summary>
+        </member>
+        <member name="P:WebShopSOA.Domain.DTO.Products.ProductDTO.Order">
+            <summary>
+            Проядкок (для сортировки)
+            </summary>
+        </member>
+        <member name="P:WebShopSOA.Domain.DTO.Products.ProductDTO.ImageUrl">
+            <summary>
+            Изображение товара
+            </summary>
+        </member>
+        <member name="P:WebShopSOA.Domain.DTO.Products.ProductDTO.Price">
+            <summary>
+            Цена товара
+            </summary>
+        </member>
+        <member name="P:WebShopSOA.Domain.DTO.Products.ProductDTO.BrandId">
+            <summary>
+            Идентификатор Брэнда (может отсутствовать)
+            </summary>
+        </member>
+        <member name="P:WebShopSOA.Domain.DTO.Products.ProductDTO.Brand">
+            <summary>
+            Объект Брэнд
+            </summary>
+        </member>
+        <member name="P:WebShopSOA.Domain.DTO.Products.ProductDTO.CategoryId">
+            <summary>
+            Идентификатор Категории
+            </summary>
+        </member>
+        <member name="P:WebShopSOA.Domain.DTO.Products.ProductDTO.Category">
+            <summary>
+            Объект Категория
+            </summary>
+        </member>
+        <member name="P:WebShopSOA.Domain.Entities.Base.Interfaces.IOrderedEntity.Order">
+            <summary>
+            Порядок
+            </summary>
+        </member>
+        <member name="P:WebShopSOA.Domain.Entities.Category.ParentId">
+            <summary>
+            Id родительской категории (при наличии)
+            </summary>
+        </member>
+        <member name="P:WebShopSOA.Domain.ViewModels.CategoryViewModel.ChildCategories">
+            <summary>
+            Список дочерних категорий
+            </summary>
+        </member>
+        <member name="P:WebShopSOA.Domain.ViewModels.CategoryViewModel.ParentCategory">
+            <summary>
+            Родительская категория
+            </summary>
+        </member>
+    </members>
+</doc>

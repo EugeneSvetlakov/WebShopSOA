@@ -6,6 +6,7 @@ using WebShopSOA.Domain.DTO.Products;
 using WebShopSOA.Domain.Entities;
 using WebShopSOA.Domain.Filters;
 using WebShopSOA.Interfaces.Services;
+using WebShopSOA.Services.Map;
 
 namespace WebShopSOA.Services.ShopProduct
 {
@@ -409,18 +410,18 @@ namespace WebShopSOA.Services.ShopProduct
         /// Получение всех категорий
         /// </summary>
         /// <returns></returns>
-        public IEnumerable<Category> GetCategories()
+        public IEnumerable<CategoryDTO> GetCategories()
         {
-            return _categories;
+            return _categories.Select(CategoryMapper.ToDTO);
         }
 
         /// <summary>
         /// Получение всех Брэндов
         /// </summary>
         /// <returns></returns>
-        public IEnumerable<Brand> GetBrands()
+        public IEnumerable<BrandDTO> GetBrands()
         {
-            return _brands;
+            return _brands.Select(BrandMapper.ToDTO);
         }
 
         /// <summary>
@@ -443,40 +444,16 @@ namespace WebShopSOA.Services.ShopProduct
                     .ToList();
             }
             return products.
-                Select(p => new ProductDTO
-                {
-                    Id = p.Id,
-                    Name = p.Name,
-                    ImageUrl = p.ImageUrl,
-                    Order = p.Order,
-                    Price = p.Price,
-                    Brand = p.Brand is null ? null : new BrandDTO
-                    {
-                        Id = p.Brand.Id,
-                        Name = p.Brand.Name
-                    }
-                });
+                Select(ProductMapper.ToDTO);
         }
 
         public ProductDTO GetProductById(int id)
         {
             var product = _products.FirstOrDefault(p => p.Id == id);
-            return new ProductDTO
-            {
-                Id = product.Id,
-                Name = product.Name,
-                ImageUrl = product.ImageUrl,
-                Order = product.Order,
-                Price = product.Price,
-                Brand = new BrandDTO
-                {
-                    Id = product.Brand.Id,
-                    Name = product.Brand.Name
-                }
-            };
+            return product.ToDTO();
         }
 
-        public void EditProduct(ProductDTO product)
+        public void EditProduct(int id, ProductDTO product)
         {
             throw new NotImplementedException();
         }

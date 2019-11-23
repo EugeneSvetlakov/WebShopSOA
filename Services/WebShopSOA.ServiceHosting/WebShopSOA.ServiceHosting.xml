@@ -1,0 +1,52 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>WebShopSOA.ServiceHosting</name>
+    </assembly>
+    <members>
+        <member name="T:WebShopSOA.ServiceHosting.Controllers.ProductsController">
+            <summary>
+            Контроллер товаров
+            </summary>
+        </member>
+        <member name="M:WebShopSOA.ServiceHosting.Controllers.ProductsController.GetProducts(WebShopSOA.Domain.Filters.ProductFilter)">
+            <summary>
+            Получить список продуктов
+            </summary>
+            <param name="filter">Фильтр</param>
+            <returns>Отфильтрованный список продуктов из БД</returns>
+        </member>
+        <member name="M:WebShopSOA.ServiceHosting.Controllers.ProductsController.GetProductById(System.Int32)">
+            <summary>
+            Получить продукт по id
+            </summary>
+            <param name="id">id продукта</param>
+            <returns>Продукт из БД по указанному id</returns>
+        </member>
+        <member name="M:WebShopSOA.ServiceHosting.Controllers.ProductsController.EditProduct(System.Int32,WebShopSOA.Domain.DTO.Products.ProductDTO)">
+            <summary>
+            Редактировать продукт
+            </summary>
+            <param name="id">id продукта</param>
+            <param name="product">Данные для обновления</param>
+        </member>
+        <member name="M:WebShopSOA.ServiceHosting.Controllers.ProductsController.DeleteProduct(System.Int32)">
+            <summary>
+            Удаленить продукт
+            </summary>
+            <param name="id">Id удаляемого продукта</param>
+        </member>
+        <member name="M:WebShopSOA.ServiceHosting.Controllers.ProductsController.GetBrands">
+            <summary>
+            Получить Брэнды
+            </summary>
+            <returns>Список всех Брэндов</returns>
+        </member>
+        <member name="M:WebShopSOA.ServiceHosting.Controllers.ProductsController.GetCategories">
+            <summary>
+            Получить Категории
+            </summary>
+            <returns>Список всех категорий из БД</returns>
+        </member>
+    </members>
+</doc>
