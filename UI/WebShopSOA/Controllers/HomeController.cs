@@ -31,5 +31,17 @@ namespace WebShopSOA.Controllers
         {
             return View();
         }
+
+        public IActionResult ErrorStatus(string id)
+        {
+            switch (id)
+            {
+                default:
+                    return Content($"Статусный код {id}");
+                case "404":
+                    return RedirectToAction(nameof(PageNotFound));
+            }
+            return NoContent();
+        }
     }
 }
