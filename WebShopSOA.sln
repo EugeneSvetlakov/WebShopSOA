@@ -29,6 +29,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{185A1D65
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebShopSOA.Tests", "Tests\WebShopSOA.Tests\WebShopSOA.Tests.csproj", "{537CB080-E36C-4F0D-928C-16C1215AF5BD}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebShopSOA.Services.Tests", "Tests\WebShopSOA.Services.Tests\WebShopSOA.Services.Tests.csproj", "{4D99D35F-97F3-4DC9-8552-89B947730AB6}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -71,6 +73,10 @@ Global
 		{537CB080-E36C-4F0D-928C-16C1215AF5BD}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{537CB080-E36C-4F0D-928C-16C1215AF5BD}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{537CB080-E36C-4F0D-928C-16C1215AF5BD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4D99D35F-97F3-4DC9-8552-89B947730AB6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4D99D35F-97F3-4DC9-8552-89B947730AB6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4D99D35F-97F3-4DC9-8552-89B947730AB6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4D99D35F-97F3-4DC9-8552-89B947730AB6}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -85,6 +91,7 @@ Global
 		{13A425D1-B3F2-4CFE-BE40-FA49AB3A707A} = {B2FAC057-F917-48C0-9A9B-2A08C502E038}
 		{FAF5F6BA-A8BC-4F7F-B49D-9357FFCDF3A4} = {041B2691-7707-46EF-9C8E-4EB8614BDF50}
 		{537CB080-E36C-4F0D-928C-16C1215AF5BD} = {185A1D65-7065-46B1-BA80-D2E8EC943F3E}
+		{4D99D35F-97F3-4DC9-8552-89B947730AB6} = {185A1D65-7065-46B1-BA80-D2E8EC943F3E}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {81C797FA-BCA8-4CF9-83B6-4C42A9360155}

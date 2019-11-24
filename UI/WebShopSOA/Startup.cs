@@ -85,7 +85,8 @@ namespace WebShopSOA
 
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>(); // для доступа к Cookies
 
-            services.AddScoped<ICartService, CookieCartService>(); // Сервис Корзины на Cookies
+            services.AddScoped<ICartStore, CookieCartStore>(); // Сервис хранилища Корзины на Cookies
+            services.AddScoped<ICartService, CartService>(); // Сервис Корзины на Cookies
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
