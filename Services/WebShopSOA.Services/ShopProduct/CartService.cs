@@ -53,7 +53,7 @@ namespace WebShopSOA.Services.ShopProduct
 
         public void RemoveAll()
         {
-            _Cart = new Cart { Items = new List<CartItem>() };
+            _Cart.Items.Clear();
         }
 
         public void AddToCart(int id)
