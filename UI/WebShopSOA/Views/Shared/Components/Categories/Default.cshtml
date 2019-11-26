@@ -21,7 +21,7 @@
                         <ul>
                             @foreach (var childCategory in parentCategory.ChildCategories)
                             {
-                                <li @(childCategory.Id == Model.CurrentCategoryId ? "active" : null)>
+                                <li class="@(childCategory.Id == Model.CurrentCategoryId ? "active" : null)">
                                     <a asp-controller="Catalog"
                                        asp-action="Products"
                                        asp-route-CategoryId="@childCategory.Id">@childCategory.Name</a>
@@ -36,7 +36,14 @@
         {
             <div class="panel panel-default">
                 <div class="panel-heading">
-                    <h4 class="panel-title"><a asp-controller="Catalog" asp-action="Products" asp-route-CategoryId="@parentCategory.Id">@parentCategory.Name</a></h4>
+                    <h4 class="panel-title">
+                        <a asp-controller="Catalog"
+                           asp-action="Products"
+                           asp-route-CategoryId="@parentCategory.Id"
+                           class="@(parentCategory.Id == Model.CurrentCategoryId ? "active" : null)">
+                            @parentCategory.Name
+                        </a>
+                    </h4>
                 </div>
             </div>
         }

@@ -16,7 +16,7 @@
     @*BrandsViewComponent*@
     @*<vc:Brands></vc:Brands>*@
     
-    @await  Component.InvokeAsync("Brands", new { BrandsId = Context.Request.Query["BrandsId"].ToString() }) 
+    @await  Component.InvokeAsync("Brands", new { BrandId = Context.Request.Query["BrandId"].ToString() }) 
 
 
     <div class="price-range">
