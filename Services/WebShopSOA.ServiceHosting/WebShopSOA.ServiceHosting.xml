@@ -48,5 +48,19 @@
             </summary>
             <returns>Список всех категорий из БД</returns>
         </member>
+        <member name="M:WebShopSOA.ServiceHosting.Controllers.ProductsController.GetBrandById(System.Int32)">
+            <summary>
+            Получить Брэнд по идентификатору
+            </summary>
+            <param name="id">идентификатор</param>
+            <returns></returns>
+        </member>
+        <member name="M:WebShopSOA.ServiceHosting.Controllers.ProductsController.GetCategoryById(System.Int32)">
+            <summary>
+            Получить Категорию по идентификатору
+            </summary>
+            <param name="id">идентификатор</param>
+            <returns></returns>
+        </member>
     </members>
 </doc>

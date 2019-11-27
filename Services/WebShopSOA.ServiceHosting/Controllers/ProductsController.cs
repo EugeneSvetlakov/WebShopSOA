@@ -75,5 +75,21 @@ namespace WebShopSOA.ServiceHosting.Controllers
         /// <returns>Список всех категорий из БД</returns>
         [HttpGet("categories")]
         public IEnumerable<CategoryDTO> GetCategories() => _ProductService.GetCategories();
+
+        /// <summary>
+        /// Получить Брэнд по идентификатору
+        /// </summary>
+        /// <param name="id">идентификатор</param>
+        /// <returns></returns>
+        [HttpGet("brands/{id}")]
+        public BrandDTO GetBrandById(int id) => _ProductService.GetBrandById(id);
+
+        /// <summary>
+        /// Получить Категорию по идентификатору
+        /// </summary>
+        /// <param name="id">идентификатор</param>
+        /// <returns></returns>
+        [HttpGet("categories/{id}")]
+        public CategoryDTO GetCategoryById(int id) => _ProductService.GetCategoryById(id);
     }
 }

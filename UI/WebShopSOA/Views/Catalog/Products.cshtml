@@ -1,6 +1,7 @@
 ﻿@model WebShopSOA.Domain.ViewModels.CatalogViewModel
 @{
     ViewData["Title"] = "Товары";
+    Layout = "_LayoutBreadCrumbs";
 }
 
 @await Html.PartialAsync(partialViewName: "Partial/_Advertisement")
