@@ -99,5 +99,8 @@ namespace WebShopSOA.Services.ShopProduct
             throw new NotImplementedException();
         }
 
+        public BrandDTO GetBrandById(int id) => _context.Brands.FirstOrDefault(b => b.Id == id).ToDTO();
+
+        public CategoryDTO GetCategoryById(int id) => _context.Categories.FirstOrDefault(c => c.Id == id).ToDTO();
     }
 }

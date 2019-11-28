@@ -13,7 +13,11 @@ namespace WebShopSOA.Interfaces.Services
     {
         IEnumerable<BrandDTO> GetBrands();
 
+        BrandDTO GetBrandById(int id);
+
         IEnumerable<CategoryDTO> GetCategories();
+
+        CategoryDTO GetCategoryById(int id);
 
         IEnumerable<ProductDTO> GetProducts(ProductFilter filter);
 

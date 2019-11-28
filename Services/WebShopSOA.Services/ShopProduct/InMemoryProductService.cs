@@ -462,5 +462,15 @@ namespace WebShopSOA.Services.ShopProduct
         {
             throw new NotImplementedException();
         }
+
+        public BrandDTO GetBrandById(int id)
+        {
+            throw new NotImplementedException();
+        }
+
+        public CategoryDTO GetCategoryById(int id)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

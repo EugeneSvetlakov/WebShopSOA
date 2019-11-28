@@ -4,16 +4,20 @@
 *@
 <div class="left-sidebar">
     @* Вариант 1 вызова ВьюКомпонента "Categories" *@
-    @* @await  Component.InvokeAsync("Categories") *@
+    @*<vc:Categories></vc:Categories>*@
     
     @*
         Вариант 2 (через TagHelpers, зарегистрированный в _ViewImports.cshtml 'addTagHelper *, WebShopSOA')
         вызова ВьюКомпонента "Categories"
     *@
-    <vc:Categories></vc:Categories>
 
+    @await  Component.InvokeAsync("Categories", new { CategoryId = Context.Request.Query["CategoryId"].ToString() }) 
+    
     @*BrandsViewComponent*@
-    <vc:Brands></vc:Brands>
+    @*<vc:Brands></vc:Brands>*@
+    
+    @await  Component.InvokeAsync("Brands", new { BrandId = Context.Request.Query["BrandId"].ToString() }) 
+
 
     <div class="price-range">
         <!--price-range-->

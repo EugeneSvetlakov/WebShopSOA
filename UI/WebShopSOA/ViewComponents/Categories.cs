@@ -18,14 +18,24 @@ namespace WebShopSOA.ViewComponents
             _productService = productService;
         }
 
-        public async Task<IViewComponentResult> InvokeAsync()
+        public async Task<IViewComponentResult> InvokeAsync(string CategoryId)
         {
-            var Categories = GetCategories();
-            return View(Categories);
+            var category_id = int.TryParse(CategoryId, out var id) ? id : (int?)null;
+
+            var Categories = GetCategories(category_id, out var parent_category_id);
+
+            return View(new CategoryCompliteViewModel
+            {
+                Categories = Categories,
+                CurrentCategoryId = category_id,
+                CurrentParentCategory = parent_category_id
+            });
         }
 
-        private List<CategoryViewModel> GetCategories()
+        private List<CategoryViewModel> GetCategories(int? CategoryId, out int? ParentCategoryId)
         {
+            ParentCategoryId = null;
+
             var categories = _productService.GetCategories();
             // получим и заполним родительские категории
             var rootCategories = categories.Where(p => !p.ParentId.HasValue).ToArray();
@@ -46,6 +56,9 @@ namespace WebShopSOA.ViewComponents
                 var childCategories = categories.Where(c => c.ParentId == CategoryViewModel.Id);
                 foreach (var childCategory in childCategories)
                 {
+                    if (childCategory.Id == CategoryId)
+                        ParentCategoryId = CategoryViewModel.Id;
+
                     CategoryViewModel.ChildCategories.Add(new CategoryViewModel()
                     {
                         Id = childCategory.Id,

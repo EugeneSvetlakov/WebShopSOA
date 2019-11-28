@@ -20,10 +20,14 @@ namespace WebShopSOA.ViewComponents
             _productService = productService;
         }
 
-        public async Task<IViewComponentResult> InvokeAsync()
+        public async Task<IViewComponentResult> InvokeAsync(string BrandId)
         {
             var Brands = GetBrands();
-            return View(Brands);
+            return View(new BrandCompliteViewModel
+            {
+                Brands = Brands,
+                CurrentBrandId = int.TryParse(BrandId, out var id) ? id : (int?) null
+            });
         }
 
         private List<BrandViewModel> GetBrands()

@@ -1,9 +1,9 @@
-﻿@model IEnumerable<WebShopSOA.Domain.ViewModels.CategoryViewModel>
+﻿@model WebShopSOA.Domain.ViewModels.CategoryCompliteViewModel
 
 <h2>Категории</h2>
 <!--category-productsr-->
 <div class="panel-group category-products" id="accordian">
-    @foreach (var parentCategory in Model)
+    @foreach (var parentCategory in Model.Categories)
     {
         if (parentCategory.ChildCategories.Count > 0)
         {
@@ -16,12 +16,16 @@
                         </a>
                     </h4>
                 </div>
-                <div id="@parentCategory.Name.ToLower()" class="panel-collapse collapse">
+                <div id="@parentCategory.Name.ToLower()" class="panel-collapse collapse @(parentCategory.Id == Model.CurrentParentCategory ? "in" : null)">
                     <div class="panel-body">
                         <ul>
                             @foreach (var childCategory in parentCategory.ChildCategories)
                             {
-                                <li><a asp-controller="Catalog" asp-action="Products" asp-route-CategoryId="@childCategory.Id">@childCategory.Name</a></li>
+                                <li class="@(childCategory.Id == Model.CurrentCategoryId ? "active" : null)">
+                                    <a asp-controller="Catalog"
+                                       asp-action="Products"
+                                       asp-route-CategoryId="@childCategory.Id">@childCategory.Name</a>
+                                </li>
                             }
                         </ul>
                     </div>
@@ -32,7 +36,14 @@
         {
             <div class="panel panel-default">
                 <div class="panel-heading">
-                    <h4 class="panel-title"><a asp-controller="Catalog" asp-action="Products" asp-route-CategoryId="@parentCategory.Id">@parentCategory.Name</a></h4>
+                    <h4 class="panel-title">
+                        <a asp-controller="Catalog"
+                           asp-action="Products"
+                           asp-route-CategoryId="@parentCategory.Id"
+                           class="@(parentCategory.Id == Model.CurrentCategoryId ? "active" : null)">
+                            @parentCategory.Name
+                        </a>
+                    </h4>
                 </div>
             </div>
         }

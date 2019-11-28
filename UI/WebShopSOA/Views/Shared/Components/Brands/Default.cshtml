@@ -1,4 +1,4 @@
-﻿@model IEnumerable<WebShopSOA.Domain.ViewModels.BrandViewModel>
+﻿@model WebShopSOA.Domain.ViewModels.BrandCompliteViewModel
 
 
 
@@ -7,9 +7,15 @@
     <h2>Брэнды</h2>
     <div class="brands-name">
         <ul class="nav nav-pills nav-stacked">
-            @foreach (var item in Model)
+            @foreach (var item in Model.Brands)
             {
-                <li><a asp-controller="Catalog" asp-action="Products" asp-route-BrandId="@item.Id"> <span class="pull-right">(@item.ProductCount)</span>@item.Name</a></li>
+                <li class="@(item.Id == Model.CurrentBrandId ? "active" : null)">
+                    <a asp-controller="Catalog"
+                       asp-action="Products"
+                       asp-route-BrandId="@item.Id">
+                        <span class="pull-right">(@item.ProductCount)</span>@item.Name
+                    </a>
+                </li>
             }
         </ul>
     </div>
