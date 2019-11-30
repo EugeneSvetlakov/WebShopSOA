@@ -1,0 +1,10 @@
+﻿@model CartViewModel
+
+<div class="d-inline p-2">
+    <a asp-controller="Cart" asp-action="CartDetails">Корзина</a> @{
+        if (Model.ItemsCount > 0)
+        {
+            <span>(@Model.ItemsCount.ToString())</span>
+        }
+    }
+</div>

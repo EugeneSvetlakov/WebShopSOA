@@ -99,5 +99,21 @@ namespace WebShopSOA.Controllers
             ViewData["Id"] = id;
             return View();
         }
+
+        #region Api
+
+        public IActionResult GetCartView() => ViewComponent("Cart");
+
+        public IActionResult AddToCartApi(int id)
+        {
+            _cartService.AddToCart(id);
+            return Json(new
+            {
+                id,
+                message = $"Товар id:{id} успешно добавленв корзину"
+            });
+        }
+
+        #endregion
     }
 }
