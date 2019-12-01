@@ -16,6 +16,11 @@
             <div class="col-sm-9 padding-right">
                 @await Html.PartialAsync("Partial/_ProductItems", Model.Products)
 
+                <paging page-model="@Model.PageViewModel"
+                        page-action="Products"
+                        page-url-CategoryId="@Model.CategoryId"
+                        page-url-BrandId="@Model.BrandId"></paging>
+
                 @* @await Html.PartialAsync("Partial/_CategoryTab") *@
 
                 @* @await Html.PartialAsync("Partial/_RecommendedItems") *@
