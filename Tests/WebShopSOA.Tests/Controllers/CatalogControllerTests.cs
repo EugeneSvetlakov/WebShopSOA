@@ -98,11 +98,7 @@ namespace WebShopSOA.Tests.Controllers
         [TestMethod]
         public void Products_Return_Correct_View()
         {
-            var product_service_mock = new Mock<IProductService>();
-
-            product_service_mock
-                .Setup(p => p.GetProducts(It.IsAny<ProductFilter>()))
-                .Returns<ProductFilter>(filter => new[] 
+            var product = new[]
                 {
                     new ProductDTO
                     {
@@ -130,6 +126,16 @@ namespace WebShopSOA.Tests.Controllers
                             Name = "Brand of item 2"
                         }
                     }
+                };
+
+            var product_service_mock = new Mock<IProductService>();
+
+            product_service_mock
+                .Setup(p => p.GetProducts(It.IsAny<ProductFilter>()))
+                .Returns<ProductFilter>(filter => new PagedProductDTO
+                {
+                    Products = product,
+                    TotalCount = product.Length
                 });
 
             var controller = new CatalogController(product_service_mock.Object);

@@ -28,7 +28,7 @@ namespace WebShopSOA.Controllers
             {
                 BrandId = brandId,
                 CategoryId = categoryId,
-                Products = products.Select(p => new ProductViewModel()
+                Products = products.Products.Select(p => new ProductViewModel()
                 {
                     Id = p.Id,
                     ImageUrl = p.ImageUrl,

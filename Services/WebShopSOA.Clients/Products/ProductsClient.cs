@@ -15,10 +15,10 @@ namespace WebShopSOA.Clients.Products
     {
         public ProductsClient(IConfiguration config) : base(config, "api/products") { }
 
-        public IEnumerable<ProductDTO> GetProducts(ProductFilter filter) =>
+        public PagedProductDTO GetProducts(ProductFilter filter) =>
             Post(_ServiceAddress, filter)
             .Content
-            .ReadAsAsync<List<ProductDTO>>()
+            .ReadAsAsync<PagedProductDTO>()
             .Result;
 
         public ProductDTO GetProductById(int id) =>

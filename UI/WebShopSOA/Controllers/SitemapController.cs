@@ -30,7 +30,7 @@ namespace WebShopSOA.Controllers
             foreach (var brand in ProductService.GetBrands()) 
                 nodes.Add(new SitemapNode(Url.Action("Products", "Catalog", new { BrandId = brand.Id })));
 
-            foreach (var product in ProductService.GetProducts(new ProductFilter()))
+            foreach (var product in ProductService.GetProducts(new ProductFilter()).Products)
                 nodes.Add(new SitemapNode(Url.Action("ProductDetails", "Catalog", new { ProductId = product.Id })));
 
             return new SitemapProvider().CreateSitemap(new SitemapModel(nodes));

@@ -307,7 +307,11 @@ namespace WebShopSOA.Services.Tests.ShopProduct
             var product_service_mock = new Mock<IProductService>();
             product_service_mock
                 .Setup(c => c.GetProducts(It.IsAny<ProductFilter>()))
-                .Returns(products);
+                .Returns(new PagedProductDTO
+                {
+                    Products = products,
+                    TotalCount = products.Count()
+                });
 
             var cart_store_mock = new Mock<ICartStore>();
             cart_store_mock

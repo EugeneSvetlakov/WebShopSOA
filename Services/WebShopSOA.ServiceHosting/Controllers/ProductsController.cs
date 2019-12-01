@@ -32,7 +32,7 @@ namespace WebShopSOA.ServiceHosting.Controllers
         /// <param name="filter">Фильтр</param>
         /// <returns>Отфильтрованный список продуктов из БД</returns>
         [HttpPost, ActionName("Post")]
-        public IEnumerable<ProductDTO> GetProducts(ProductFilter filter) =>
+        public PagedProductDTO GetProducts(ProductFilter filter) =>
             _ProductService.GetProducts(filter);
 
         /// <summary>

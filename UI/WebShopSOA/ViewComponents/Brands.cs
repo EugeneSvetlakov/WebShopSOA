@@ -46,7 +46,7 @@ namespace WebShopSOA.ViewComponents
                     Order = brand.Order,
                     ProductCount =
                                 _productService
-                                .GetProducts(new ProductFilter { BrandId = brand.Id })?
+                                .GetProducts(new ProductFilter { BrandId = brand.Id }).Products?
                                 .Count() ?? null
                 });
             }
