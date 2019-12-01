@@ -114,6 +114,37 @@ namespace WebShopSOA.Controllers
             });
         }
 
+        public IActionResult DecrementFromCartApi(int id)
+        {
+            _cartService.DecrementFromCart(id);
+
+            return Json(new
+            {
+                id,
+                message = $"Количество товара id:{id} уменьшено на 1."
+            });
+        }
+
+        public IActionResult RemoveFromCartApi(int id)
+        {
+            _cartService.RemoveFromCart(id);
+
+            return Json(new
+            {
+                id,
+                message = $"Товар id:{id} удален из корзины."
+            });
+        }
+        public IActionResult RemoveAllApi()
+        {
+            _cartService.RemoveAll();
+
+            return Json(new
+            {
+                message = $"Очистка корзины выполнена."
+            });
+        }
+
         #endregion
     }
 }

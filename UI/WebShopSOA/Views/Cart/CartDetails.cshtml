@@ -5,7 +5,7 @@
 
 <section id="cart_items">
     <div class="container">
-        
+
         @*@await Html.PartialAsync(partialViewName: "Partial/_CartItems")*@
 
         <div class="table-responsive cart_info">
@@ -37,34 +37,34 @@
                                 </h4>
                                 <p>Web ID: 1089772</p>
                             </td>
-                            <td class="cart_price">
+                            <td class="cart_price" data-price="@item.Key.Price">
                                 <p>@item.Key.Price.ToString("C")</p>
                             </td>
                             <td class="cart_quantity">
                                 <div class="cart_quantity_button">
                                     <a class="cart_quantity_up"
-                                       asp-controller="Cart"
-                                       asp-action="AddToCart"
-                                       asp-route-id="@item.Key.Id"
-                                       asp-route-returnUrl="@Context.Request.Path">
+                                       data-id="@item.Key.Id"
+                                       href="#">
                                         +
                                     </a>
                                     <input class="cart_quantity_input" readonly value="@item.Value" name="quantity" autocomplete="off" size="2">
                                     <a class="cart_quantity_down"
-                                       asp-controller="Cart"
-                                       asp-action="DecrementFromCart"
-                                       asp-route-id="@item.Key.Id">
+                                       data-id="@item.Key.Id"
+                                       href="#">
                                         -
                                     </a>
                                 </div>
                             </td>
                             <td class="cart_total">
-                                <p class="cart_total_price">@((item.Value * item.Key.Price).ToString("C"))</p>
+                                <p class="cart_total_price"
+                                   data-price="@(item.Value * item.Key.Price)">
+                                    @((item.Value * item.Key.Price).ToString("C"))
+                                </p>
                             </td>
                             <td class="cart_delete">
-                                <a class="cart_quantity_delete"
-                                   asp-controller="Cart"
-                                   asp-action="RemoveFromCart">
+                                <a href="#"
+                                   data-id="@item.Key.Id"
+                                   class="cart_quantity_delete">
                                     <i class="fa fa-times"></i>
                                 </a>
                             </td>
@@ -86,16 +86,22 @@
             <div class="col-sm-6">
                 <div class="total_area">
                     <ul>
-                        <li>Сумма <span>@Model.CartViewModel.Items.Sum(x => x.Value * x.Key.Price).ToString("C")</span></li>
-                        <li>Общая скидка <span>@Model.CartViewModel.Discount.ToString("C")</span></li>
+                        <li>Сумма <span id="order-sum">@Model.CartViewModel.Items.Sum(x => x.Value * x.Key.Price).ToString("C")</span></li>
+                        <li>
+                            Общая скидка
+                            <span id="order-discount"
+                                  data-discount="@Model.CartViewModel.Discount">
+                                @Model.CartViewModel.Discount.ToString("C")
+                            </span>
+                        </li>
                         @*<li>Eco Tax <span>$2</span></li>*@
                         <li>Цена доставки <span>Free</span></li>
                         <li>
                             К оплате
-                            <span>
+                            <span id="total-order-sum">
                                 @((Model.CartViewModel.Items.Sum(x => x.Value * x.Key.Price)
-                                                          - Model.CartViewModel.Discount)
-                                                   .ToString("C"))
+                                                                                                          - Model.CartViewModel.Discount)
+                                                                                                   .ToString("C"))
                             </span>
                         </li>
                     </ul>
