@@ -48,11 +48,11 @@ namespace WebShopSOA.Services.ShopProduct
             return product.ToDTO();
         }
 
-        public IEnumerable<ProductDTO> GetProducts(ProductFilter filter)
+        public PagedProductDTO GetProducts(ProductFilter filter)
         {
             var query = _context.Products
-                .Include(p=> p.Category)
-                .Include(p=> p.Brand)
+                .Include(p => p.Category)
+                .Include(p => p.Brand)
                 .AsQueryable();
             if (filter.BrandId.HasValue)
             {
@@ -63,14 +63,29 @@ namespace WebShopSOA.Services.ShopProduct
                 query = query.Where(c => c.CategoryId.Equals(filter.CategoryId.Value));
             }
 
-            return query.ToList().Select(ProductMapper.ToDTO);
+            var total_count = query.Count();
+
+            if (filter?.PageSize != null)
+                query = query
+                    .Skip((filter.Page - 1) * (int)filter.PageSize)
+                    .Take((int)filter.PageSize);
+
+            //return query.ToList().Select(ProductMapper.ToDTO);
+
+            return new PagedProductDTO
+            {
+                Products = query
+                    .AsEnumerable()
+                    .Select(ProductMapper.ToDTO),
+                TotalCount = total_count
+            };
         }
 
         public void EditProduct(int id, ProductDTO product)
         {
             var DbProduct = _context.Products.First(p => p.Id == product.Id);
 
-            if(id == DbProduct.Id)
+            if (id == DbProduct.Id)
             {
                 DbProduct.Name = product.Name;
                 DbProduct.Price = product.Price;

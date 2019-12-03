@@ -19,7 +19,7 @@ namespace WebShopSOA.Interfaces.Services
 
         CategoryDTO GetCategoryById(int id);
 
-        IEnumerable<ProductDTO> GetProducts(ProductFilter filter);
+        PagedProductDTO GetProducts(ProductFilter filter);
 
         // CRUD Product
         // Create/Update

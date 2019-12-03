@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Configuration;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
 using System;
@@ -45,7 +46,9 @@ namespace WebShopSOA.Tests.Controllers
                     }
                 });
 
-            var controller = new CatalogController(product_service_mock.Object);
+            var configuration_mock = new Mock<IConfiguration>();
+
+            var controller = new CatalogController(product_service_mock.Object, configuration_mock.Object);
 
             #endregion
 
@@ -78,7 +81,10 @@ namespace WebShopSOA.Tests.Controllers
                 .Setup(p => p.GetProductById(It.IsAny<int>()))
                 .Returns(default(ProductDTO));
 
-            var controller = new CatalogController(product_service_mock.Object);
+            var configuration_mock = new Mock<IConfiguration>();
+
+
+            var controller = new CatalogController(product_service_mock.Object, configuration_mock.Object);
 
             #endregion
 
@@ -98,11 +104,7 @@ namespace WebShopSOA.Tests.Controllers
         [TestMethod]
         public void Products_Return_Correct_View()
         {
-            var product_service_mock = new Mock<IProductService>();
-
-            product_service_mock
-                .Setup(p => p.GetProducts(It.IsAny<ProductFilter>()))
-                .Returns<ProductFilter>(filter => new[] 
+            var product = new[]
                 {
                     new ProductDTO
                     {
@@ -130,9 +132,31 @@ namespace WebShopSOA.Tests.Controllers
                             Name = "Brand of item 2"
                         }
                     }
+                };
+
+            var pageProduct = new PagedProductDTO
+            {
+                Products = product,
+                TotalCount = product.Length
+            };
+
+            var product_service_mock = new Mock<IProductService>();
+
+            product_service_mock
+                .Setup(p => p.GetProducts(It.IsAny<ProductFilter>()))
+                .Returns<ProductFilter>(filter => new PagedProductDTO
+                {
+                    Products = product,
+                    TotalCount = product.Length
                 });
 
-            var controller = new CatalogController(product_service_mock.Object);
+            var configuration_mock = new Mock<IConfiguration>();
+
+            configuration_mock
+                .Setup(c => c[It.IsAny<string>()])
+                .Returns("3");
+
+            var controller = new CatalogController(product_service_mock.Object, configuration_mock.Object);
 
             const int expected_category_id = 1;
             const int expected_brand_id = 5;

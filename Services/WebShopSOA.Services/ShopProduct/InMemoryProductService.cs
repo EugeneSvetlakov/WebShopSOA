@@ -429,7 +429,7 @@ namespace WebShopSOA.Services.ShopProduct
         /// </summary>
         /// <param name="filter">Фильтр товаров</param>
         /// <returns></returns>
-        public IEnumerable<ProductDTO> GetProducts(ProductFilter filter)
+        public PagedProductDTO GetProducts(ProductFilter filter)
         {
             var products = _products;
             if (filter.CategoryId.HasValue)
@@ -443,8 +443,12 @@ namespace WebShopSOA.Services.ShopProduct
                         p.BrandId.HasValue && p.BrandId.Value.Equals(filter.BrandId.Value))
                     .ToList();
             }
-            return products.
-                Select(ProductMapper.ToDTO);
+            return new PagedProductDTO
+            {
+                Products = products.
+                    Select(ProductMapper.ToDTO),
+                TotalCount = products.Capacity
+            };
         }
 
         public ProductDTO GetProductById(int id)

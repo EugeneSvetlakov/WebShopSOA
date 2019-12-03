@@ -74,7 +74,7 @@ namespace WebShopSOA.Services.ShopProduct
             var products = _productService.GetProducts(new ProductFilter()
             {
                 Ids = _Cart.Items.Select(i => i.ProductId).ToList()
-            }).Select(p => new ProductViewModel()
+            }).Products.Select(p => new ProductViewModel()
             {
                 Id = p.Id,
                 ImageUrl = p.ImageUrl,

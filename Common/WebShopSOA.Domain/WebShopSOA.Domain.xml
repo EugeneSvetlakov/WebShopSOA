@@ -34,6 +34,21 @@
             Порядок (для сортировки)
             </summary>
         </member>
+        <member name="T:WebShopSOA.Domain.DTO.Products.PagedProductDTO">
+            <summary>
+            Одна страница товаров каталога
+            </summary>
+        </member>
+        <member name="P:WebShopSOA.Domain.DTO.Products.PagedProductDTO.Products">
+            <summary>
+            Товары страницы
+            </summary>
+        </member>
+        <member name="P:WebShopSOA.Domain.DTO.Products.PagedProductDTO.TotalCount">
+            <summary>
+            Полное количество товаров в каталоге
+            </summary>
+        </member>
         <member name="T:WebShopSOA.Domain.DTO.Products.ProductDTO">
             <summary>
             Товар

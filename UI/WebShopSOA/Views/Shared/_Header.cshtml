@@ -69,7 +69,9 @@
                             <li><a href="#"><i class="fa fa-user"></i> Account</a></li>
                             <li><a href="#"><i class="fa fa-star"></i> Wishlist</a></li>
                             <li><a asp-controller="Order" asp-action="Checkout"><i class="fa fa-crosshairs"></i> Checkout</a></li>
-                            <li><a asp-controller="Cart" asp-action="CartDetails"><i class="fa fa-shopping-cart"></i> Cart</a></li>
+                            <li id="cart-container">
+                                <vc:cart></vc:cart>
+                            </li>
                             <li>
                                 @await Component.InvokeAsync("LoginLogout")
                             </li>
