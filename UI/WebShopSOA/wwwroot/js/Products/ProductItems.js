@@ -1,6 +1,6 @@
 ﻿ProductItems = {
     _properties: {
-        getUrl:""
+        getUrl: ""
     },
 
     init: properties => {
@@ -23,17 +23,16 @@
             let query = "";
 
             for (let key in data) {
-                if (data.hasOwnProperties(key))
+                if (data.hasOwnProperty(key))
                     query += `${key}=${data[key]}&`;
             }
 
             $.get(`${ProductItems._properties.getUrl}?${query}`)
-                .done(result =>
-                {
+                .done(result => {
                     container.html(result);
                     container.LoadingOverlay("hide");
 
-                    $(".pagination").removeClass("active");
+                    $(".pagination li").removeClass("active");
                     $(".pagination li a").prop("href", "#");
                     $(`.pagination li a[data-page=${page}]`)
                         .removeAttr("href")
@@ -42,4 +41,4 @@
                 .fail(() => console.log("clickOnPage getItems error"));
         }
     }
-}
+};
