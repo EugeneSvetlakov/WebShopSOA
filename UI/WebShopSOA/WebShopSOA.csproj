@@ -8,9 +8,13 @@
 
   <ItemGroup>
     <Compile Remove="Logs\**" />
+    <Compile Remove="wwwroot\lib\**" />
     <Content Remove="Logs\**" />
+    <Content Remove="wwwroot\lib\**" />
     <EmbeddedResource Remove="Logs\**" />
+    <EmbeddedResource Remove="wwwroot\lib\**" />
     <None Remove="Logs\**" />
+    <None Remove="wwwroot\lib\**" />
   </ItemGroup>
 
   <ItemGroup>
@@ -54,7 +58,6 @@
     <Folder Include="Areas\Admin\Data\" />
     <Folder Include="Areas\Admin\Models\" />
     <Folder Include="Views\Home\Partial\" />
-    <Folder Include="wwwroot\lib\" />
   </ItemGroup>
 
   <ItemGroup>
