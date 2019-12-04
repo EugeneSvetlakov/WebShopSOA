@@ -1,6 +1,6 @@
 ﻿@using WebShopSOA.Controllers
 @using WebShopSOA.Domain.ViewModels.BreadCrumbs
-@{ 
+@{
     Layout = "_Layout";
 
     BreadCrumbType type;
@@ -16,7 +16,7 @@
             : BreadCrumbType.None;
     }
 
-    if((string)ViewContext.RouteData.Values["action"] == nameof(CatalogController.ProductDetails))
+    if ((string)ViewContext.RouteData.Values["action"] == nameof(CatalogController.ProductDetails))
     {
         type = BreadCrumbType.Product;
     }
@@ -26,7 +26,7 @@
 
     switch (type)
     {
-        default:throw new ArgumentOutOfRangeException();
+        default: throw new ArgumentOutOfRangeException();
 
         case BreadCrumbType.None: break;
 
@@ -52,3 +52,11 @@
 @await Component.InvokeAsync("BreadCrumbs", new { Type = type, id, FromType = from_type })
 
 @RenderBody()
+
+@section Styles{
+    @RenderSection("Styles", false)
+}
+
+@section Scripts{
+    @RenderSection("Scripts", false)
+}

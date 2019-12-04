@@ -14,7 +14,9 @@
             </div>
 
             <div class="col-sm-9 padding-right">
-                @await Html.PartialAsync("Partial/_ProductItems", Model.Products)
+                <div id="items-container">
+                    @await Html.PartialAsync("Partial/_ProductItems", Model.Products)
+                </div>
 
                 <paging page-model="@Model.PageViewModel"
                         page-action="Products"
@@ -28,3 +30,7 @@
         </div>
     </div>
 </section>
+
+@section Scripts{ 
+
+}

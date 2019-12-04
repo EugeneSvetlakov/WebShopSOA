@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using WebShopSOA.Interfaces.Services;
 using WebShopSOA.Domain.ViewModels;
 using Microsoft.Extensions.Configuration;
+using WebShopSOA.Domain.Filters;
 
 namespace WebShopSOA.Controllers
 {
@@ -21,9 +22,11 @@ namespace WebShopSOA.Controllers
             _configuration = configuration;
         }
 
+        private const string _PageSize = "PageSize";
+
         public IActionResult Products(int? categoryId, int? brandId, int Page = 1)
         {
-            var page_size = int.Parse(_configuration["PageSize"]);
+            var page_size = int.Parse(_configuration[_PageSize]);
 
             // получаем список отфильтрованных продуктов
             var products = _productService.GetProducts(
@@ -75,6 +78,33 @@ namespace WebShopSOA.Controllers
                 Price = product.Price,
                 BrandName = product.Brand?.Name ?? string.Empty,
                 Order = product.Order
+            });
+        }
+
+        public IActionResult GetFilteredItems(int? CategoryId, int? BrandId, int Page = 1)
+        {
+            var products = GetProducts(CategoryId, BrandId, Page);
+            return PartialView("Partial/_ProductItems", products);
+        }
+
+        private IEnumerable<ProductViewModel> GetProducts(int? CategoryId, int? BrandId, int Page)
+        {
+            var products_model = _productService.GetProducts(new ProductFilter
+            {
+                CategoryId = CategoryId,
+                BrandId = BrandId,
+                Page = Page,
+                PageSize = int.Parse(_configuration[_PageSize])
+            });
+
+            return products_model.Products.Select(p => new ProductViewModel
+            {
+                Id = p.Id,
+                Name = p.Name,
+                ImageUrl = p.ImageUrl,
+                Price = p.Price,
+                Order = p.Order,
+                BrandName = p.Brand?.Name ?? string.Empty
             });
         }
     }
