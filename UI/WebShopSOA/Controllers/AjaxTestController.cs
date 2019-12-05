@@ -33,6 +33,11 @@ namespace WebShopSOA.Controllers
             });
 
         }
+
+        public IActionResult SignalRTest()
+        {
+            return View();
+        }
     }
 
 }
