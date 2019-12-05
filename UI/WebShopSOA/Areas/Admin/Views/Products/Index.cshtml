@@ -1,4 +1,4 @@
-﻿@model IEnumerable<ProductDTO>
+﻿@model PagedProductDTO
 <!--Admin Area-->
 @{
     ViewData["Title"] = "Товары";
@@ -7,18 +7,18 @@
 <table class="table">
     <thead>
         <tr>
-            <th>@Html.DisplayNameFor(model => model.FirstOrDefault().Id)</th>
-            <th>@Html.DisplayNameFor(model => model.FirstOrDefault().Name)</th>
-            <th>@Html.DisplayNameFor(model => model.FirstOrDefault().Price)</th>
-            <th>@Html.DisplayNameFor(model => model.FirstOrDefault().ImageUrl)</th>
-            <th>@Html.DisplayNameFor(model => model.FirstOrDefault().Brand)</th>
+            <th>@Html.DisplayNameFor(model => model.Products.FirstOrDefault().Id)</th>
+            <th>@Html.DisplayNameFor(model => model.Products.FirstOrDefault().Name)</th>
+            <th>@Html.DisplayNameFor(model => model.Products.FirstOrDefault().Price)</th>
+            <th>@Html.DisplayNameFor(model => model.Products.FirstOrDefault().ImageUrl)</th>
+            <th>@Html.DisplayNameFor(model => model.Products.FirstOrDefault().Brand)</th>
             <th>@*@Html.DisplayNameFor(model => model.FirstOrDefault().Category)*@</th>
-            <th>@Html.DisplayNameFor(model => model.FirstOrDefault().Order)</th>
+            <th>@Html.DisplayNameFor(model => model.Products.FirstOrDefault().Order)</th>
             
         </tr>
     </thead>
     <tbody>
-        @foreach (var item in Model)
+        @foreach (var item in Model.Products)
         {
         <tr>
             <td>@Html.DisplayFor(modelItem => item.Id)</td>
