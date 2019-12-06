@@ -3,6 +3,11 @@
 <div class="d-inline">
     <a asp-controller="Profile" asp-action="Index" class="btn btn-link"><i class="fa fa-lock"></i>Здравствуйте, @User.Identity.Name</a>
     <a asp-controller="Account" asp-action="Logout" class="btn btn-link"><i class="fa fa-unlock"></i>Выйти</a>
+    @if (User.IsInRole("Administrators"))
+    {
+        <a asp-area="Admin" asp-controller="Home" asp-action="Index" class="btn btn-link"><i class="fa fa-bolt"></i>Админка</a>
+    }
+
 </div>
     @*<form method="post" asp-controller="Account" asp-action="Logout" asp-antiforgery="true" class="d-inline">
             <span>@User.Identity.Name | </span>

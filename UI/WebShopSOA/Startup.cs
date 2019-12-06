@@ -23,6 +23,7 @@ using WebShopSOA.Interfaces.Services;
 using WebShopSOA.Services.ShopProduct;
 using WebShopSOA.Log4Net;
 using WebShopSOA.Infrastructure.Middleware;
+using WebShopSOA.Hubs;
 
 namespace WebShopSOA
 {
@@ -38,6 +39,8 @@ namespace WebShopSOA
         // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddSignalR();
+
             services.AddMvc(options => 
             {
                 options.Filters.Add(new SimpleActionFilterAttribute());
@@ -105,6 +108,8 @@ namespace WebShopSOA
 
             app.UseMiddleware<ErrorHandlingMiddleware>(); // Добавлние промежуточного ПО
             //app.UseMiddleware(typeof(ErrorHandlingMiddleware)); //Второй вариант добавления промежуточного ПО
+
+            app.UseSignalR(route => route.MapHub<InformationHub>("/info"));
 
             //app.UseMvcWithDefaultRoute();
             // Конфигурация инфраструктуры MVC
